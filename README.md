@@ -26,7 +26,7 @@ wenn du Bugs reporzen möchstes benutze bitte den Button "Report A Bug?" in der 
 
 ####SCREENSHOTS
 
-Hier siehst du einige Screenshots der neusten Version des Programms: http://imgur.com/a/X07Ij
+Hier siehst du einige Screenshots der neusten Version des Programms: http://imgur.com/a/xMEC9
 
 ---
 
