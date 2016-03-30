@@ -18,7 +18,7 @@ namespace recTimer
     {
 
         #region vars
-        public static string buildVersion = "0.2.0124";
+        public static string buildVersion = "0.2.0127";
 
         int tSS = 0;
         int tMM = 0;
@@ -46,6 +46,9 @@ namespace recTimer
             if (Convert.ToBoolean(Settings.Default["updates"]))
             {
                 clsUpdate.testForUpdate();
+            } else
+            {
+                lbUpdateWarn.Text = "WARNUNG!";
             }
         }
 
@@ -381,7 +384,7 @@ namespace recTimer
             }
             #endregion
 
-            hook.KeyDown += new KeyEventHandler(hook_keyDown);
+            hook.KeyUp += new KeyEventHandler(hook_keyUp);
         }
 
         private void markKeyHook()
@@ -604,11 +607,11 @@ namespace recTimer
             }
             #endregion
 
-            hook.KeyDown += new KeyEventHandler(hook_keyDownMark);
+            hook.KeyUp += new KeyEventHandler(hook_keyUpMark);
         }
 
         //HOOK KEYDOWN EVENT RECORDING
-        private void hook_keyDown(object sender, KeyEventArgs e)
+        private void hook_keyUp(object sender, KeyEventArgs e)
         {
             if (keyWasPressed)
             {
@@ -635,7 +638,7 @@ namespace recTimer
         }
 
         //HOOK KEYDOWN EVENT MARKING
-        private void hook_keyDownMark(object sender, KeyEventArgs e)
+        private void hook_keyUpMark(object sender, KeyEventArgs e)
         {
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
             numbMarks++;
@@ -690,6 +693,12 @@ namespace recTimer
             {
                 Process.Start(Settings.Default["programm5"].ToString());
             }
+        }
+
+        private void lbUpdateWarn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("ACHTUNG! Die Benachichtigung für Updates ist deaktiviert! Wenn sie dies ändern wollen gehen sie in die Einstellungen und aktivieren sie die Update-Benachichtigung!");
+            lbUpdateWarn.Text = "";
         }
     }
 }

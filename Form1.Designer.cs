@@ -64,10 +64,11 @@
             this.timerKeyboardHook = new System.Windows.Forms.Timer(this.components);
             this.lbVersion = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.listMarker = new System.Windows.Forms.ListBox();
-            this.btResetMarks = new System.Windows.Forms.Button();
             this.btSaveMarks = new System.Windows.Forms.Button();
+            this.btResetMarks = new System.Windows.Forms.Button();
+            this.listMarker = new System.Windows.Forms.ListBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.lbUpdateWarn = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -369,7 +370,7 @@
             // 
             // timerKeyboardHook
             // 
-            this.timerKeyboardHook.Interval = 10;
+            this.timerKeyboardHook.Interval = 1000;
             this.timerKeyboardHook.Tick += new System.EventHandler(this.timerKeyboardHook_Tick);
             // 
             // lbVersion
@@ -394,13 +395,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Marker";
             // 
-            // listMarker
+            // btSaveMarks
             // 
-            this.listMarker.FormattingEnabled = true;
-            this.listMarker.Location = new System.Drawing.Point(9, 19);
-            this.listMarker.Name = "listMarker";
-            this.listMarker.Size = new System.Drawing.Size(291, 69);
-            this.listMarker.TabIndex = 0;
+            this.btSaveMarks.Location = new System.Drawing.Point(163, 94);
+            this.btSaveMarks.Name = "btSaveMarks";
+            this.btSaveMarks.Size = new System.Drawing.Size(137, 23);
+            this.btSaveMarks.TabIndex = 2;
+            this.btSaveMarks.Text = "Marken speichern...";
+            this.btSaveMarks.UseVisualStyleBackColor = true;
+            this.btSaveMarks.Click += new System.EventHandler(this.btSaveMarks_Click);
             // 
             // btResetMarks
             // 
@@ -412,25 +415,34 @@
             this.btResetMarks.UseVisualStyleBackColor = true;
             this.btResetMarks.Click += new System.EventHandler(this.btResetMarks_Click);
             // 
-            // btSaveMarks
+            // listMarker
             // 
-            this.btSaveMarks.Location = new System.Drawing.Point(163, 94);
-            this.btSaveMarks.Name = "btSaveMarks";
-            this.btSaveMarks.Size = new System.Drawing.Size(137, 23);
-            this.btSaveMarks.TabIndex = 2;
-            this.btSaveMarks.Text = "Marken speichern...";
-            this.btSaveMarks.UseVisualStyleBackColor = true;
-            this.btSaveMarks.Click += new System.EventHandler(this.btSaveMarks_Click);
+            this.listMarker.FormattingEnabled = true;
+            this.listMarker.Location = new System.Drawing.Point(9, 19);
+            this.listMarker.Name = "listMarker";
+            this.listMarker.Size = new System.Drawing.Size(291, 69);
+            this.listMarker.TabIndex = 0;
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+            // 
+            // lbUpdateWarn
+            // 
+            this.lbUpdateWarn.AutoSize = true;
+            this.lbUpdateWarn.LinkColor = System.Drawing.Color.Red;
+            this.lbUpdateWarn.Location = new System.Drawing.Point(213, 452);
+            this.lbUpdateWarn.Name = "lbUpdateWarn";
+            this.lbUpdateWarn.Size = new System.Drawing.Size(0, 13);
+            this.lbUpdateWarn.TabIndex = 14;
+            this.lbUpdateWarn.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbUpdateWarn_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 474);
+            this.Controls.Add(this.lbUpdateWarn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.linkLabel2);
@@ -499,6 +511,7 @@
         private System.Windows.Forms.Button btSaveMarks;
         private System.Windows.Forms.Button btResetMarks;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.LinkLabel lbUpdateWarn;
     }
 }
 

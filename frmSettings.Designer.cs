@@ -31,7 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbMarkKey = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.cbRecKey = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,7 +46,17 @@
             this.tbRecFolder = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbProgramm5 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbProgramm4 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbProgramm3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbProgramm2 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbProgramm1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -50,35 +64,19 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbMarkKey = new System.Windows.Forms.ComboBox();
-            this.tbProgramm1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbProgramm2 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbProgramm3 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbProgramm4 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbProgramm5 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cbUpdates = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -100,6 +98,28 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cbUpdates);
+            this.groupBox4.Location = new System.Drawing.Point(14, 234);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(527, 60);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Updates";
+            // 
+            // cbUpdates
+            // 
+            this.cbUpdates.AutoSize = true;
+            this.cbUpdates.Checked = true;
+            this.cbUpdates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbUpdates.Location = new System.Drawing.Point(20, 28);
+            this.cbUpdates.Name = "cbUpdates";
+            this.cbUpdates.Size = new System.Drawing.Size(255, 17);
+            this.cbUpdates.TabIndex = 0;
+            this.cbUpdates.Text = "Möchten sie bei Updates benachichtigt werden?";
+            this.cbUpdates.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cbMarkKey);
@@ -112,6 +132,76 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hotkeys";
+            // 
+            // cbMarkKey
+            // 
+            this.cbMarkKey.FormattingEnabled = true;
+            this.cbMarkKey.Items.AddRange(new object[] {
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+            "NumPad0",
+            "NumPad1",
+            "NumPad2",
+            "NumPad3",
+            "NumPad4",
+            "NumPad5",
+            "NumPad6",
+            "NumPad7",
+            "NumPad8",
+            "NumPad9",
+            "Add",
+            "Devide",
+            "Substract",
+            "Multiply"});
+            this.cbMarkKey.Location = new System.Drawing.Point(108, 56);
+            this.cbMarkKey.Name = "cbMarkKey";
+            this.cbMarkKey.Size = new System.Drawing.Size(297, 21);
+            this.cbMarkKey.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Marker setzen:";
             // 
             // cbRecKey
             // 
@@ -273,14 +363,95 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Aufnahmesoftware";
             // 
-            // tabPage3
+            // button5
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(556, 458);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Timer und Marker";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.button5.Location = new System.Drawing.Point(399, 157);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(135, 23);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "Alles zurücksetzten";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 134);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(66, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Programm 5:";
+            // 
+            // tbProgramm5
+            // 
+            this.tbProgramm5.Location = new System.Drawing.Point(78, 131);
+            this.tbProgramm5.Name = "tbProgramm5";
+            this.tbProgramm5.Size = new System.Drawing.Size(456, 20);
+            this.tbProgramm5.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 107);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(66, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Programm 4:";
+            // 
+            // tbProgramm4
+            // 
+            this.tbProgramm4.Location = new System.Drawing.Point(78, 104);
+            this.tbProgramm4.Name = "tbProgramm4";
+            this.tbProgramm4.Size = new System.Drawing.Size(456, 20);
+            this.tbProgramm4.TabIndex = 9;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 80);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Programm 3:";
+            // 
+            // tbProgramm3
+            // 
+            this.tbProgramm3.Location = new System.Drawing.Point(78, 77);
+            this.tbProgramm3.Name = "tbProgramm3";
+            this.tbProgramm3.Size = new System.Drawing.Size(456, 20);
+            this.tbProgramm3.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Programm 2:";
+            // 
+            // tbProgramm2
+            // 
+            this.tbProgramm2.Location = new System.Drawing.Point(78, 51);
+            this.tbProgramm2.Name = "tbProgramm2";
+            this.tbProgramm2.Size = new System.Drawing.Size(456, 20);
+            this.tbProgramm2.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Programm 1:";
+            // 
+            // tbProgramm1
+            // 
+            this.tbProgramm1.Location = new System.Drawing.Point(78, 25);
+            this.tbProgramm1.Name = "tbProgramm1";
+            this.tbProgramm1.Size = new System.Drawing.Size(456, 20);
+            this.tbProgramm1.TabIndex = 0;
             // 
             // button3
             // 
@@ -322,188 +493,6 @@
             this.timer2.Interval = 10;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Marker setzen:";
-            // 
-            // cbMarkKey
-            // 
-            this.cbMarkKey.FormattingEnabled = true;
-            this.cbMarkKey.Items.AddRange(new object[] {
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "NumPad0",
-            "NumPad1",
-            "NumPad2",
-            "NumPad3",
-            "NumPad4",
-            "NumPad5",
-            "NumPad6",
-            "NumPad7",
-            "NumPad8",
-            "NumPad9",
-            "Add",
-            "Devide",
-            "Substract",
-            "Multiply"});
-            this.cbMarkKey.Location = new System.Drawing.Point(108, 56);
-            this.cbMarkKey.Name = "cbMarkKey";
-            this.cbMarkKey.Size = new System.Drawing.Size(297, 21);
-            this.cbMarkKey.TabIndex = 10;
-            // 
-            // tbProgramm1
-            // 
-            this.tbProgramm1.Location = new System.Drawing.Point(78, 25);
-            this.tbProgramm1.Name = "tbProgramm1";
-            this.tbProgramm1.Size = new System.Drawing.Size(456, 20);
-            this.tbProgramm1.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Programm 1:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Programm 2:";
-            // 
-            // tbProgramm2
-            // 
-            this.tbProgramm2.Location = new System.Drawing.Point(78, 51);
-            this.tbProgramm2.Name = "tbProgramm2";
-            this.tbProgramm2.Size = new System.Drawing.Size(456, 20);
-            this.tbProgramm2.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 80);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Programm 3:";
-            // 
-            // tbProgramm3
-            // 
-            this.tbProgramm3.Location = new System.Drawing.Point(78, 77);
-            this.tbProgramm3.Name = "tbProgramm3";
-            this.tbProgramm3.Size = new System.Drawing.Size(456, 20);
-            this.tbProgramm3.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 107);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(66, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Programm 4:";
-            // 
-            // tbProgramm4
-            // 
-            this.tbProgramm4.Location = new System.Drawing.Point(78, 104);
-            this.tbProgramm4.Name = "tbProgramm4";
-            this.tbProgramm4.Size = new System.Drawing.Size(456, 20);
-            this.tbProgramm4.TabIndex = 9;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 134);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(66, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Programm 5:";
-            // 
-            // tbProgramm5
-            // 
-            this.tbProgramm5.Location = new System.Drawing.Point(78, 131);
-            this.tbProgramm5.Name = "tbProgramm5";
-            this.tbProgramm5.Size = new System.Drawing.Size(456, 20);
-            this.tbProgramm5.TabIndex = 12;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(399, 157);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(135, 23);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "Alles zurücksetzten";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.cbUpdates);
-            this.groupBox4.Location = new System.Drawing.Point(14, 234);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(527, 60);
-            this.groupBox4.TabIndex = 11;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Updates";
-            // 
-            // cbUpdates
-            // 
-            this.cbUpdates.AutoSize = true;
-            this.cbUpdates.Checked = true;
-            this.cbUpdates.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUpdates.Location = new System.Drawing.Point(20, 28);
-            this.cbUpdates.Name = "cbUpdates";
-            this.cbUpdates.Size = new System.Drawing.Size(255, 17);
-            this.cbUpdates.TabIndex = 0;
-            this.cbUpdates.Text = "Möchten sie bei Updates benachichtigt werden?";
-            this.cbUpdates.UseVisualStyleBackColor = true;
-            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +508,8 @@
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -526,8 +517,6 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -542,7 +531,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
