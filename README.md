@@ -9,6 +9,11 @@ Dieses Tool zeigt an:
 - **RAM-Auslastung** (in %)
 - **HDD-Speicher** (Feier Speicher in GB + Verhältnis in ProgressBar)
 
+Zusätzliche Funktionen (seit v0.2.0124a):
+- Möglichkeit zum Abschalten Update-Notifications
+- Start der festgelegten Aufnahmeprogramme über den Button
+- Zeit-Marker hinzufügen mit Hotkeys
+
 ---
 
 ####WICHTIG
@@ -28,10 +33,7 @@ Hier siehst du einige Screenshots der neusten Version des Programms: http://imgu
 ####WAS WIRD NOCH IMPLEMENTIERT?
 
 - Anzeige wie lange es noch dauert bis die Platte voll ist
-- Möglichkeit zum Abschalten Update-Notifications
-- Start der festgelegten Aufnahmeprogramme über den Button
 - Zugriff auf den Aufnahmeordner vom Programm aus
-- Zeit-Marker hinzufügen mit Hotkeys
 
 ---
 
