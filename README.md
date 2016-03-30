@@ -31,6 +31,7 @@ Hier siehst du einige Screenshots der neusten Version des Programms: http://imgu
 - Möglichkeit zum Abschalten Update-Notifications
 - Start der festgelegten Aufnahmeprogramme über den Button
 - Zugriff auf den Aufnahmeordner vom Programm aus
+- Zeit-Marker hinzufügen mit Hotkeys
 
 ---
 
