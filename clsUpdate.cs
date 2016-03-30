@@ -11,7 +11,8 @@ namespace recTimer
 {
     class clsUpdate
     {
-        public static string downloadURL = "http://github.com/zekroTJA";
+        public static string downloadURL = "https://github.com/zekroTJA/zekros-recording-Tool/releases";
+
         public static void testForUpdate()
         {
             WebClient client = new WebClient();
@@ -21,8 +22,8 @@ namespace recTimer
 
             if (newestversion != Form1.buildVersion)
             {
-                const string message = "Your version of this Tool is outdated! Would you like download the latest version now?";
-                const string caption = "Update available!";
+                string message = "Es ist ein Update für das Tool verfügbar! (Deine Version: " + Form1.buildVersion + " / Neuste Version: " + newestversion + ") Möchtsest du jetzt das Update herunterladen?";
+                const string caption = "Update verfügbar!";
                 var result = MessageBox.Show(message, caption,
                                   MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Information);

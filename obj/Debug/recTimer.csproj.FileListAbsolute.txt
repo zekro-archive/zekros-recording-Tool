@@ -9,3 +9,7 @@ c:\users\ringo hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.csprojResolveAssemblyReference.cache
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.frmSettings.resources
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.frmInfo.resources
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\bin\Debug\recTimer.exe.manifest
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\bin\Debug\recTimer.application
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.exe.manifest
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.application

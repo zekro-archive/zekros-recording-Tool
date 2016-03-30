@@ -58,5 +58,89 @@ namespace recTimer.Properties {
                 this["recFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string markKey {
+            get {
+                return ((string)(this["markKey"]));
+            }
+            set {
+                this["markKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string programm1 {
+            get {
+                return ((string)(this["programm1"]));
+            }
+            set {
+                this["programm1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string programm2 {
+            get {
+                return ((string)(this["programm2"]));
+            }
+            set {
+                this["programm2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string programm3 {
+            get {
+                return ((string)(this["programm3"]));
+            }
+            set {
+                this["programm3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string programm4 {
+            get {
+                return ((string)(this["programm4"]));
+            }
+            set {
+                this["programm4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string programm5 {
+            get {
+                return ((string)(this["programm5"]));
+            }
+            set {
+                this["programm5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool updates {
+            get {
+                return ((bool)(this["updates"]));
+            }
+            set {
+                this["updates"] = value;
+            }
+        }
     }
 }

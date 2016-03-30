@@ -63,12 +63,18 @@
             this.pcRAM = new System.Diagnostics.PerformanceCounter();
             this.timerKeyboardHook = new System.Windows.Forms.Timer(this.components);
             this.lbVersion = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listMarker = new System.Windows.Forms.ListBox();
+            this.btResetMarks = new System.Windows.Forms.Button();
+            this.btSaveMarks = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,13 +98,13 @@
             // 
             // cmdSoftwareStarten
             // 
-            this.cmdSoftwareStarten.Enabled = false;
             this.cmdSoftwareStarten.Location = new System.Drawing.Point(9, 6);
             this.cmdSoftwareStarten.Name = "cmdSoftwareStarten";
             this.cmdSoftwareStarten.Size = new System.Drawing.Size(135, 25);
             this.cmdSoftwareStarten.TabIndex = 0;
             this.cmdSoftwareStarten.Text = "Software starten";
             this.cmdSoftwareStarten.UseVisualStyleBackColor = true;
+            this.cmdSoftwareStarten.Click += new System.EventHandler(this.cmdSoftwareStarten_Click);
             // 
             // panel2
             // 
@@ -313,7 +319,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(12, 318);
+            this.label7.Location = new System.Drawing.Point(12, 452);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
             this.label7.TabIndex = 10;
@@ -322,7 +328,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(278, 318);
+            this.linkLabel2.Location = new System.Drawing.Point(278, 452);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(25, 13);
             this.linkLabel2.TabIndex = 11;
@@ -370,17 +376,62 @@
             // 
             this.lbVersion.AutoSize = true;
             this.lbVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbVersion.Location = new System.Drawing.Point(95, 318);
+            this.lbVersion.Location = new System.Drawing.Point(95, 452);
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(83, 13);
             this.lbVersion.TabIndex = 12;
             this.lbVersion.Text = "© 2016 zekro  | ";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btSaveMarks);
+            this.groupBox1.Controls.Add(this.btResetMarks);
+            this.groupBox1.Controls.Add(this.listMarker);
+            this.groupBox1.Location = new System.Drawing.Point(3, 321);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(307, 128);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Marker";
+            // 
+            // listMarker
+            // 
+            this.listMarker.FormattingEnabled = true;
+            this.listMarker.Location = new System.Drawing.Point(9, 19);
+            this.listMarker.Name = "listMarker";
+            this.listMarker.Size = new System.Drawing.Size(291, 69);
+            this.listMarker.TabIndex = 0;
+            // 
+            // btResetMarks
+            // 
+            this.btResetMarks.Location = new System.Drawing.Point(9, 94);
+            this.btResetMarks.Name = "btResetMarks";
+            this.btResetMarks.Size = new System.Drawing.Size(138, 23);
+            this.btResetMarks.TabIndex = 1;
+            this.btResetMarks.Text = "Marken reseten";
+            this.btResetMarks.UseVisualStyleBackColor = true;
+            this.btResetMarks.Click += new System.EventHandler(this.btResetMarks_Click);
+            // 
+            // btSaveMarks
+            // 
+            this.btSaveMarks.Location = new System.Drawing.Point(163, 94);
+            this.btSaveMarks.Name = "btSaveMarks";
+            this.btSaveMarks.Size = new System.Drawing.Size(137, 23);
+            this.btSaveMarks.TabIndex = 2;
+            this.btSaveMarks.Text = "Marken speichern...";
+            this.btSaveMarks.UseVisualStyleBackColor = true;
+            this.btSaveMarks.Click += new System.EventHandler(this.btSaveMarks_Click);
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(315, 336);
+            this.ClientSize = new System.Drawing.Size(315, 474);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbVersion);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.label7);
@@ -401,6 +452,7 @@
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,6 +494,11 @@
         private System.Windows.Forms.Label lbSpace;
         private System.Windows.Forms.Timer timerKeyboardHook;
         private System.Windows.Forms.Label lbVersion;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox listMarker;
+        private System.Windows.Forms.Button btSaveMarks;
+        private System.Windows.Forms.Button btResetMarks;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
