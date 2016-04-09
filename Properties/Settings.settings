@@ -30,6 +30,9 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="updates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="alternateHook" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

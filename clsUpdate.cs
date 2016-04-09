@@ -20,9 +20,9 @@ namespace recTimer
             StreamReader reader = new StreamReader(stream);
             string newestversion = reader.ReadToEnd();
 
-            if (newestversion != Form1.buildVersion)
+            if (newestversion != clsConst.buildVersion)
             {
-                string message = "Es ist ein Update für das Tool verfügbar! (Deine Version: " + Form1.buildVersion + " / Neuste Version: " + newestversion + ") Möchtsest du jetzt das Update herunterladen?";
+                string message = "Es ist ein Update für das Tool verfügbar! (Deine Version: " + clsConst.buildVersion + " / Neuste Version: " + newestversion + ") Möchtsest du jetzt das Update herunterladen?";
                 const string caption = "Update verfügbar!";
                 var result = MessageBox.Show(message, caption,
                                   MessageBoxButtons.YesNo,

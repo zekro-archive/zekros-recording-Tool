@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using recTimer.Properties;
+using System.Threading;
+using System.Runtime.InteropServices;
 
 
 namespace recTimer
@@ -18,13 +20,23 @@ namespace recTimer
     {
 
         #region vars
-        public static string buildVersion = "0.2.0127";
+        
 
         int tSS = 0;
         int tMM = 0;
         int tHH = 0;
         int numbMarks = 1;
-        bool keyWasPressed = false; 
+        bool keyWasPressed = false;
+
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        const int MOD_CONTROL = 0x0002;
+        const int MOD_SHIFT = 0x0004;
+        const int WM_HOTKEY = 0x0312;
         #endregion
 
         public Form1()
@@ -39,9 +51,17 @@ namespace recTimer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            {
+                recAltKeyHook();
+                markAltKeyHook();
+            }
+            else {
+                timerKeyboardHook.Start();
+            }
+
             timerCPU.Start();
-            timerKeyboardHook.Start();
-            lbVersion.Text = "preAlpha v." + buildVersion + "a";
+            lbVersion.Text = "preAlpha v." + clsConst.buildVersion + "a";
 
             if (Convert.ToBoolean(Settings.Default["updates"]))
             {
@@ -50,6 +70,29 @@ namespace recTimer
             {
                 lbUpdateWarn.Text = "WARNUNG!";
             }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            
+            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            {
+            
+                if (m.Msg == WM_HOTKEY && (int)m.WParam == 1)
+                {
+                    hookAlt_keyUp();
+                }
+                if (m.Msg == WM_HOTKEY && (int)m.WParam == 2)
+                {
+                    hookAlt_keyUpMark();
+                }
+                base.WndProc(ref m);
+            
+            } else
+            {
+                base.WndProc(ref m);
+            }
+            
         }
 
         private void progressBar4_Click(object sender, EventArgs e)
@@ -143,9 +186,7 @@ namespace recTimer
                     var totalUsedSpace = (d.TotalSize - d.TotalFreeSpace) / (1024F * 1024F * 1024F);
                     var totalFreeSpace = d.TotalFreeSpace / (1024F * 1024F * 1024F);
                     var totalSize = d.TotalSize / (1024F * 1024F * 1024F);
-
                     var partOfSpace = (totalUsedSpace / totalSize) * 100;
-
                     lbSpace.Text = totalFreeSpace.ToString() + " GB";
                     pbDisks.Value = Convert.ToInt16((totalUsedSpace / totalSize) * 100);
                 }
@@ -164,6 +205,228 @@ namespace recTimer
         }
         #endregion
 
+        globalKeyboardHook hook = new globalKeyboardHook();
+
+        private void recAltKeyHook()
+        {
+            string recKeyload = Settings.Default["recKey"].ToString();
+
+            #region IfHellOfDOOM
+
+                if (recKeyload == "F1")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F1);
+                }
+                else if (recKeyload == "F2")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F2);
+                }
+                else if (recKeyload == "F3")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F3);
+                }
+                else if (recKeyload == "F4")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
+                }
+                else if (recKeyload == "F5")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F5);
+                }
+                else if (recKeyload == "F6")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F6);
+                }
+                else if (recKeyload == "F7")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F7);
+                }
+                else if (recKeyload == "F8")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F8);
+                }
+                else if (recKeyload == "F9")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F9);
+                }
+                else if (recKeyload == "F10")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F10);
+                }
+                else if (recKeyload == "F11")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F11);
+                }
+                else if (recKeyload == "F12")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F12);
+                }
+
+                else if (recKeyload == "A")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.A);
+                }
+                else if (recKeyload == "B")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.B);
+                }
+                else if (recKeyload == "C")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Z);
+                }
+                else if (recKeyload == "D")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.D);
+                }
+                else if (recKeyload == "E")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.E);
+                }
+                else if (recKeyload == "F")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F);
+                }
+                else if (recKeyload == "G")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.G);
+                }
+                else if (recKeyload == "H")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.H);
+                }
+                else if (recKeyload == "I")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.I);
+                }
+                else if (recKeyload == "J")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.J);
+                }
+                else if (recKeyload == "K")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.K);
+                }
+                else if (recKeyload == "L")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.L);
+                }
+                else if (recKeyload == "M")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.M);
+                }
+                else if (recKeyload == "N")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.N);
+                }
+                else if (recKeyload == "O")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.O);
+                }
+                else if (recKeyload == "P")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.P);
+                }
+                else if (recKeyload == "Q")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Q);
+                }
+                else if (recKeyload == "R")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.R);
+                }
+                else if (recKeyload == "S")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.S);
+                }
+                else if (recKeyload == "T")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.T);
+                }
+                else if (recKeyload == "U")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.U);
+                }
+                else if (recKeyload == "V")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.V);
+                }
+                else if (recKeyload == "W")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.W);
+                }
+                else if (recKeyload == "X")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.X);
+                }
+                else if (recKeyload == "Y")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Y);
+                }
+                else if (recKeyload == "Z")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.C);
+                }
+
+                else if (recKeyload == "NumPad1")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad1);
+                }
+                else if (recKeyload == "NumPad2")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad2);
+                }
+                else if (recKeyload == "NumPad3")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad3);
+                }
+                else if (recKeyload == "NumPad4")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad4);
+                }
+                else if (recKeyload == "NumPad5")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad5);
+                }
+                else if (recKeyload == "NumPad6")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad6);
+                }
+                else if (recKeyload == "NumPad7")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad7);
+                }
+                else if (recKeyload == "NumPad18")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad8);
+                }
+                else if (recKeyload == "NumPad9")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad9);
+                }
+                else if (recKeyload == "NumPad0")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad0);
+                }
+
+                else if (recKeyload == "Add")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Add);
+                }
+                else if (recKeyload == "Substract")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Subtract);
+                }
+                else if (recKeyload == "Multiply")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Multiply);
+                }
+
+                else
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
+                }
+            #endregion
+        }
         private void recKeyHook()
         {
             globalKeyboardHook hook = new globalKeyboardHook();
@@ -387,6 +650,226 @@ namespace recTimer
             hook.KeyUp += new KeyEventHandler(hook_keyUp);
         }
 
+        private void markAltKeyHook()
+        {
+            string recKeyload = Settings.Default["markKey"].ToString();
+            
+            #region IfHellOfDOOM_2
+
+                if (recKeyload == "F1")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F1);
+                }
+                else if (recKeyload == "F2")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F2);
+                }
+                else if (recKeyload == "F3")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F3);
+                }
+                else if (recKeyload == "F4")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
+                }
+                else if (recKeyload == "F5")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F5);
+                }
+                else if (recKeyload == "F6")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F6);
+                }
+                else if (recKeyload == "F7")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F7);
+                }
+                else if (recKeyload == "F8")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F8);
+                }
+                else if (recKeyload == "F9")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F9);
+                }
+                else if (recKeyload == "F10")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F10);
+                }
+                else if (recKeyload == "F11")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F11);
+                }
+                else if (recKeyload == "F12")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F12);
+                }
+
+                else if (recKeyload == "A")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.A);
+                }
+                else if (recKeyload == "B")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.B);
+                }
+                else if (recKeyload == "C")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Z);
+                }
+                else if (recKeyload == "D")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.D);
+                }
+                else if (recKeyload == "E")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.E);
+                }
+                else if (recKeyload == "F")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F);
+                }
+                else if (recKeyload == "G")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.G);
+                }
+                else if (recKeyload == "H")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.H);
+                }
+                else if (recKeyload == "I")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.I);
+                }
+                else if (recKeyload == "J")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.J);
+                }
+                else if (recKeyload == "K")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.K);
+                }
+                else if (recKeyload == "L")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.L);
+                }
+                else if (recKeyload == "M")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.M);
+                }
+                else if (recKeyload == "N")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.N);
+                }
+                else if (recKeyload == "O")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.O);
+                }
+                else if (recKeyload == "P")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.P);
+                }
+                else if (recKeyload == "Q")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Q);
+                }
+                else if (recKeyload == "R")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.R);
+                }
+                else if (recKeyload == "S")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.S);
+                }
+                else if (recKeyload == "T")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.T);
+                }
+                else if (recKeyload == "U")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.U);
+                }
+                else if (recKeyload == "V")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.V);
+                }
+                else if (recKeyload == "W")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.W);
+                }
+                else if (recKeyload == "X")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.X);
+                }
+                else if (recKeyload == "Y")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Y);
+                }
+                else if (recKeyload == "Z")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.C);
+                }
+
+                else if (recKeyload == "NumPad1")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad1);
+                }
+                else if (recKeyload == "NumPad2")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad2);
+                }
+                else if (recKeyload == "NumPad3")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad3);
+                }
+                else if (recKeyload == "NumPad4")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad4);
+                }
+                else if (recKeyload == "NumPad5")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad5);
+                }
+                else if (recKeyload == "NumPad6")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad6);
+                }
+                else if (recKeyload == "NumPad7")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad7);
+                }
+                else if (recKeyload == "NumPad18")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad8);
+                }
+                else if (recKeyload == "NumPad9")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad9);
+                }
+                else if (recKeyload == "NumPad0")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad0);
+                }
+
+                else if (recKeyload == "Add")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Add);
+                }
+                else if (recKeyload == "Substract")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Subtract);
+                }
+                else if (recKeyload == "Multiply")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Multiply);
+                }
+
+                else
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
+                }
+            #endregion
+        }
         private void markKeyHook()
         {
             globalKeyboardHook hook = new globalKeyboardHook();
@@ -636,6 +1119,29 @@ namespace recTimer
 
             e.Handled = true;
         }
+        private void hookAlt_keyUp()
+        {
+            if (keyWasPressed)
+            {
+                keyWasPressed = false;
+                lbRecInfo.Text = "Aufnahme gestoppt.";
+                lbRecInfo.ForeColor = Color.Red;
+
+                timerHH.Stop();
+                timerMM.Stop();
+                timerSS.Stop();
+            }
+            else
+            {
+                timerHH.Start();
+                timerMM.Start();
+                timerSS.Start();
+
+                lbRecInfo.Text = "Aufnahme läuft.";
+                lbRecInfo.ForeColor = Color.Green;
+                keyWasPressed = true;
+            }
+        }
 
         //HOOK KEYDOWN EVENT MARKING
         private void hook_keyUpMark(object sender, KeyEventArgs e)
@@ -644,6 +1150,11 @@ namespace recTimer
             numbMarks++;
 
             e.Handled = true;
+        }
+        private void hookAlt_keyUpMark()
+        {
+            listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
+            numbMarks++;
         }
 
         private void btResetMarks_Click(object sender, EventArgs e)

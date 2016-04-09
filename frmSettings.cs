@@ -18,6 +18,7 @@ namespace recTimer
         public static string recKey;
         public static string recFolder;
         public static bool updates;
+        public static bool showMessageCheckAlternateHookSetting = true;
         globalKeyboardHook hook = new globalKeyboardHook();
 
         public frmSettings()
@@ -66,6 +67,14 @@ namespace recTimer
             } else
             {
                 cbUpdates.Checked = false;
+            }
+
+            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            {
+                cbAlternateHook.Checked = true;
+            } else
+            {
+                cbAlternateHook.Checked = false;
             }
 
 
@@ -127,6 +136,7 @@ namespace recTimer
             Settings.Default["programm5"] = tbProgramm5.Text;
 
             Settings.Default["updates"] = cbUpdates.Checked;
+            Settings.Default["alternateHook"] = cbAlternateHook.Checked;
 
             Settings.Default.Save();
         }
@@ -169,6 +179,21 @@ namespace recTimer
             tbProgramm3.Text = "";
             tbProgramm4.Text = "";
             tbProgramm5.Text = "";
+        }
+
+        private void cbAlternateHook_CheckedChanged(object sender, EventArgs e)
+        {
+            Form currentform = Application.OpenForms["frmSettings"];
+            if (currentform != null && showMessageCheckAlternateHookSetting)
+            {
+                string message = "Um die Änderung wirksam zu machen ist es erforderlich das Programm neu zu starten!";
+                const string caption = "ACHTUNG!";
+                var result = MessageBox.Show(message, caption,
+                                  MessageBoxButtons.OK,
+                                  MessageBoxIcon.Information);
+                showMessageCheckAlternateHookSetting = false;
+            }
+                              
         }
     }
 }

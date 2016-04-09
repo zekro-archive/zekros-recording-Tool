@@ -41,6 +41,7 @@
             this.lbRecInfo = new System.Windows.Forms.Label();
             this.lbTimerHH = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lbRecTimeLeft = new System.Windows.Forms.Label();
             this.lbSpace = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -69,6 +70,7 @@
             this.listMarker = new System.Windows.Forms.ListBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.lbUpdateWarn = new System.Windows.Forms.LinkLabel();
+            this.pcHDD = new System.Diagnostics.PerformanceCounter();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -76,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcHDD)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -196,6 +199,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lbRecTimeLeft);
             this.panel3.Controls.Add(this.lbSpace);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
@@ -206,10 +210,20 @@
             this.panel3.Size = new System.Drawing.Size(307, 67);
             this.panel3.TabIndex = 3;
             // 
+            // lbRecTimeLeft
+            // 
+            this.lbRecTimeLeft.AutoSize = true;
+            this.lbRecTimeLeft.Enabled = false;
+            this.lbRecTimeLeft.Location = new System.Drawing.Point(181, 50);
+            this.lbRecTimeLeft.Name = "lbRecTimeLeft";
+            this.lbRecTimeLeft.Size = new System.Drawing.Size(13, 13);
+            this.lbRecTimeLeft.TabIndex = 15;
+            this.lbRecTimeLeft.Text = "0";
+            // 
             // lbSpace
             // 
             this.lbSpace.AutoSize = true;
-            this.lbSpace.Location = new System.Drawing.Point(160, 50);
+            this.lbSpace.Location = new System.Drawing.Point(45, 50);
             this.lbSpace.Name = "lbSpace";
             this.lbSpace.Size = new System.Drawing.Size(13, 13);
             this.lbSpace.TabIndex = 8;
@@ -218,7 +232,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(124, 50);
+            this.label2.Location = new System.Drawing.Point(9, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 7;
@@ -227,7 +241,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 50);
+            this.label1.Enabled = false;
+            this.label1.Location = new System.Drawing.Point(137, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 6;
@@ -370,7 +385,7 @@
             // 
             // timerKeyboardHook
             // 
-            this.timerKeyboardHook.Interval = 1000;
+            this.timerKeyboardHook.Interval = 250;
             this.timerKeyboardHook.Tick += new System.EventHandler(this.timerKeyboardHook_Tick);
             // 
             // lbVersion
@@ -437,6 +452,12 @@
             this.lbUpdateWarn.TabIndex = 14;
             this.lbUpdateWarn.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbUpdateWarn_LinkClicked);
             // 
+            // pcHDD
+            // 
+            this.pcHDD.CategoryName = "Datenträgeraktivität des Dateisystems";
+            this.pcHDD.CounterName = "Vom Dateisystem geschriebene Bytes";
+            this.pcHDD.InstanceName = "_Total";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -465,6 +486,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pcHDD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,6 +534,8 @@
         private System.Windows.Forms.Button btResetMarks;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.LinkLabel lbUpdateWarn;
+        private System.Windows.Forms.Label lbRecTimeLeft;
+        private System.Diagnostics.PerformanceCounter pcHDD;
     }
 }
 

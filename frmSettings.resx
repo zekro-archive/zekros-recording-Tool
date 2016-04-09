@@ -117,6 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="richTextBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="richTextBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Aktiviere die alternative Hotkey Hook, falls Probleme bei der Benutzung deines Aufanhmeprogrammes auftreten. Ein bekanntes Problem ist, dassz.B. Fraps bei der standart Hotkey Hook (globalKeyboardHook)nicht mehr seine eigenen Hotkeys erkennt.
+Un solche auftretenden Bugs zu beheben aktiviere diese alternative Hook.
+
+ACHTUNG: Bei der alternativen Hook musst du beim Drücken des festgelegten Hotkeys die STRG-Taste gedrückt halten, um den Bug zu umgehen!
+
+Zudem ist es NÖTIG das Programm nach der Umstellung NEU ZU STARTEN um die Änderungen Wirksam zu machen!
+
+Zudem könnte es zu "paranormalen" Verhalten der Funktionen des Programmes führen (Timer/Marker aktivieren ohne dass ein Key gedrückt wurde.) Daran wird noch gearbeitet! :^)</value>
+  </data>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

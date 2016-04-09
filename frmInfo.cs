@@ -15,7 +15,7 @@ namespace recTimer
         public frmInfo()
         {
             InitializeComponent();
-            lbVersionInfo.Text = "Version: preAlpha v." + Form1.buildVersion + "a";
+            lbVersionInfo.Text = "Version: preAlpha v." + clsConst.buildVersion + "a";
         }
 
         private void frmInfo_Load(object sender, EventArgs e)

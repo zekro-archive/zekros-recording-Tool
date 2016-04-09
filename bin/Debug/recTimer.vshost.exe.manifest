@@ -42,24 +42,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="44008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="52712">
       <assemblyIdentity name="recTimer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uSBUFCVfj5Rx2j7EC6yBBE2kFJG44ZK0GBHiz7aY+rU=</dsig:DigestValue>
+        <dsig:DigestValue>a/dynlQtJuw69zGmSTZVafma5wSHrV0B/g1xdUHY2rE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="recTimer.exe.config" size="1920">
+  <file name="recTimer.exe.config" size="2046">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>zwpAyiLw5zn05sMk5/UKIzTA/xxoveHuwk/3uV7CAXc=</dsig:DigestValue>
+      <dsig:DigestValue>R/91MzYQOYkNIL0vbkhVBhk/CifxiFgDRMr6kKWp2GQ=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

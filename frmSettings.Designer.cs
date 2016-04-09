@@ -29,8 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.cbAlternateHook = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -66,6 +70,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -86,6 +91,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
@@ -97,6 +103,39 @@
             this.tabPage1.Text = "Allgemeines";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.richTextBox1);
+            this.groupBox5.Controls.Add(this.cbAlternateHook);
+            this.groupBox5.Location = new System.Drawing.Point(14, 300);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(527, 145);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Hotkey Hook";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(20, 20);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(501, 87);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // cbAlternateHook
+            // 
+            this.cbAlternateHook.AutoSize = true;
+            this.cbAlternateHook.Checked = true;
+            this.cbAlternateHook.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAlternateHook.Location = new System.Drawing.Point(20, 113);
+            this.cbAlternateHook.Name = "cbAlternateHook";
+            this.cbAlternateHook.Size = new System.Drawing.Size(212, 17);
+            this.cbAlternateHook.TabIndex = 0;
+            this.cbAlternateHook.Text = "Alternative Key Hook aktivieren [BETA]";
+            this.cbAlternateHook.UseVisualStyleBackColor = true;
+            this.cbAlternateHook.CheckedChanged += new System.EventHandler(this.cbAlternateHook_CheckedChanged);
             // 
             // groupBox4
             // 
@@ -298,6 +337,7 @@
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(420, 23);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(84, 23);
@@ -318,6 +358,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(17, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
@@ -326,10 +367,12 @@
             // 
             // tbRecFolder
             // 
+            this.tbRecFolder.Enabled = false;
             this.tbRecFolder.Location = new System.Drawing.Point(108, 25);
             this.tbRecFolder.Name = "tbRecFolder";
             this.tbRecFolder.Size = new System.Drawing.Size(297, 20);
             this.tbRecFolder.TabIndex = 1;
+            this.tbRecFolder.Text = "Comming soon ;D";
             this.tbRecFolder.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // tabPage2
@@ -508,6 +551,8 @@
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -558,5 +603,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox cbUpdates;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.CheckBox cbAlternateHook;
     }
 }

@@ -133,13 +133,25 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool updates {
             get {
                 return ((bool)(this["updates"]));
             }
             set {
                 this["updates"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alternateHook {
+            get {
+                return ((bool)(this["alternateHook"]));
+            }
+            set {
+                this["alternateHook"] = value;
             }
         }
     }
