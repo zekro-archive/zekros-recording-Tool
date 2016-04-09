@@ -37,6 +37,7 @@
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.btBugReport = new System.Windows.Forms.Button();
+            this.btChangeLogs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -122,7 +123,7 @@
             // 
             // btBugReport
             // 
-            this.btBugReport.Location = new System.Drawing.Point(112, 211);
+            this.btBugReport.Location = new System.Drawing.Point(25, 212);
             this.btBugReport.Name = "btBugReport";
             this.btBugReport.Size = new System.Drawing.Size(174, 47);
             this.btBugReport.TabIndex = 8;
@@ -130,11 +131,22 @@
             this.btBugReport.UseVisualStyleBackColor = true;
             this.btBugReport.Click += new System.EventHandler(this.btBugReport_Click);
             // 
+            // btChangeLogs
+            // 
+            this.btChangeLogs.Location = new System.Drawing.Point(205, 212);
+            this.btChangeLogs.Name = "btChangeLogs";
+            this.btChangeLogs.Size = new System.Drawing.Size(174, 47);
+            this.btChangeLogs.TabIndex = 9;
+            this.btChangeLogs.Text = "Alle Changelogs";
+            this.btChangeLogs.UseVisualStyleBackColor = true;
+            this.btChangeLogs.Click += new System.EventHandler(this.btChangeLogs_Click);
+            // 
             // frmInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 311);
+            this.Controls.Add(this.btChangeLogs);
             this.Controls.Add(this.btBugReport);
             this.Controls.Add(this.linkLabel4);
             this.Controls.Add(this.linkLabel3);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.Button btBugReport;
+        private System.Windows.Forms.Button btChangeLogs;
     }
 }

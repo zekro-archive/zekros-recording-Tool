@@ -20,8 +20,6 @@ namespace recTimer
     {
 
         #region vars
-        
-
         int tSS = 0;
         int tMM = 0;
         int tHH = 0;
@@ -34,6 +32,8 @@ namespace recTimer
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
+        globalKeyboardHook hook = new globalKeyboardHook();
+
         const int MOD_CONTROL = 0x0002;
         const int MOD_SHIFT = 0x0004;
         const int WM_HOTKEY = 0x0312;
@@ -44,13 +44,9 @@ namespace recTimer
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Je nach Einstellung wird die globalkeyhook oder alternative Hook aktiviert.
             if (Convert.ToBoolean(Settings.Default["alternateHook"]))
             {
                 recAltKeyHook();
@@ -63,6 +59,7 @@ namespace recTimer
             timerCPU.Start();
             lbVersion.Text = "preAlpha v." + clsConst.buildVersion + "a";
 
+            //Wenn Updatenotification aktiviert ist wird der Update testausgeführt, sonst Warnung.
             if (Convert.ToBoolean(Settings.Default["updates"]))
             {
                 clsUpdate.testForUpdate();
@@ -72,6 +69,7 @@ namespace recTimer
             }
         }
 
+        //Alternative Hotkey Hook
         protected override void WndProc(ref Message m)
         {
             
@@ -95,27 +93,13 @@ namespace recTimer
             
         }
 
-        private void progressBar4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmdEinstellungen_Click(object sender, EventArgs e)
         {
             Form settings = new frmSettings();
             settings.ShowDialog();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Timer Reset bei Aktivieren des Buttons
         private void btReset_Click(object sender, EventArgs e)
         {
             tSS = 0;
@@ -126,11 +110,7 @@ namespace recTimer
             lbTimerHH.Text = "00";
         }
 
-        private void pbDisks_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //Offen der Infopage bei aktivieren des "Info"-Linklables
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form info = new frmInfo();
@@ -138,6 +118,7 @@ namespace recTimer
         }
 
         #region timer
+        //Timer für Timer Sekunden
         private void timerSS_Tick(object sender, EventArgs e)
         {
             tSS = tSS + 1;
@@ -147,7 +128,7 @@ namespace recTimer
             }
             lbTimerSS.Text = tSS.ToString();
         }
-
+        //Timer für Timer Minuten
         private void timerMM_Tick(object sender, EventArgs e)
         {
             tMM = tMM + 1;
@@ -157,13 +138,19 @@ namespace recTimer
             }
             lbTimerMM.Text = tMM.ToString();
         }
-
+        //Timer für Timer Stunden
         private void timerHH_Tick(object sender, EventArgs e)
         {
             tHH = tHH + 1;
             lbTimerHH.Text = tHH.ToString();
         }
 
+        /// <summary>
+        /// Timer für Aktualisierug und Anzeige der PC-Stats.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        
         private void timerCPU_Tick(object sender, EventArgs e)
         {
             int CPUload = Convert.ToInt16(pcCPU.NextValue());
@@ -197,7 +184,11 @@ namespace recTimer
                 }
             }
         }
-
+        /// <summary>
+        /// Timer und aktualisierung der Regestrierung des eingestellten Keyboard-Hotkeys und der Keyboard Hook.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerKeyboardHook_Tick(object sender, EventArgs e)
         {
             recKeyHook();
@@ -205,8 +196,10 @@ namespace recTimer
         }
         #endregion
 
-        globalKeyboardHook hook = new globalKeyboardHook();
-
+        /// <summary>
+        /// Bei Aktivierung des Hotkeys für Timer.
+        /// [Für die standart Keyboard Hook]
+        /// </summary>
         private void recAltKeyHook()
         {
             string recKeyload = Settings.Default["recKey"].ToString();
@@ -427,6 +420,10 @@ namespace recTimer
                 }
             #endregion
         }
+        /// <summary>
+        /// Bei Aktivierung des Hotkeys für Timer.
+        /// [Für die alternative Keyboard Hook]
+        /// </summary>
         private void recKeyHook()
         {
             globalKeyboardHook hook = new globalKeyboardHook();
@@ -650,6 +647,10 @@ namespace recTimer
             hook.KeyUp += new KeyEventHandler(hook_keyUp);
         }
 
+        /// <summary>
+        /// Bei Aktivierung des Hotkeys für Marker setzten.
+        /// [Für die standart Keyboard Hook]
+        /// </summary>
         private void markAltKeyHook()
         {
             string recKeyload = Settings.Default["markKey"].ToString();
@@ -870,6 +871,10 @@ namespace recTimer
                 }
             #endregion
         }
+        /// <summary>
+        /// Bei Aktivierung des Hotkeys für Marker setzten.
+        /// [Für die alternative Keyboard Hook]
+        /// </summary>
         private void markKeyHook()
         {
             globalKeyboardHook hook = new globalKeyboardHook();
@@ -1093,7 +1098,12 @@ namespace recTimer
             hook.KeyUp += new KeyEventHandler(hook_keyUpMark);
         }
 
-        //HOOK KEYDOWN EVENT RECORDING
+        /// <summary>
+        /// HOOK KEYDOWN EVENT RECORDING
+        /// [STANDART KEY HOOK]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hook_keyUp(object sender, KeyEventArgs e)
         {
             if (keyWasPressed)
@@ -1119,6 +1129,10 @@ namespace recTimer
 
             e.Handled = true;
         }
+        /// <summary>
+        /// HOOK KEYDOWN EVENT RECORDING
+        /// [ALTERNATIVE KEY HOOK]
+        /// </summary>
         private void hookAlt_keyUp()
         {
             if (keyWasPressed)
@@ -1143,7 +1157,12 @@ namespace recTimer
             }
         }
 
-        //HOOK KEYDOWN EVENT MARKING
+        /// <summary>
+        /// HOOK KEYDOWN EVENT MARKING
+        /// [STANDART KEY HOOK]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hook_keyUpMark(object sender, KeyEventArgs e)
         {
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
@@ -1151,6 +1170,10 @@ namespace recTimer
 
             e.Handled = true;
         }
+        /// <summary>
+        /// HOOK KEYDOWN EVENT MARKING
+        /// [ALTERNATE KEY HOOK]
+        /// </summary>
         private void hookAlt_keyUpMark()
         {
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
@@ -1176,10 +1199,6 @@ namespace recTimer
             Writer.Close();
 
             MessageBox.Show("Datei gespeichert!");
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
         }
 
         private void cmdSoftwareStarten_Click(object sender, EventArgs e)
@@ -1211,5 +1230,20 @@ namespace recTimer
             MessageBox.Show("ACHTUNG! Die Benachichtigung für Updates ist deaktiviert! Wenn sie dies ändern wollen gehen sie in die Einstellungen und aktivieren sie die Update-Benachichtigung!");
             lbUpdateWarn.Text = "";
         }
+
+        #region EMPTY METHODS
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void pbDisks_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+        }
+        #endregion
     }
 }

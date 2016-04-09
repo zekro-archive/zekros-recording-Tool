@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="52712">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="58856">
       <assemblyIdentity name="recTimer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>a/dynlQtJuw69zGmSTZVafma5wSHrV0B/g1xdUHY2rE=</dsig:DigestValue>
+        <dsig:DigestValue>0J1JlEnPV/gt6qpm7AP39LD4lAfHdyJGLixwRL3Hjzw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

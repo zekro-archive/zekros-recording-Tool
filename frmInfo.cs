@@ -47,5 +47,10 @@ namespace recTimer
         {
             System.Diagnostics.Process.Start("mailto:zekroyt@outlook.de?subject=zekrosRecordingTool%20BugReport");
         }
+
+        private void btChangeLogs_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://onedrive.live.com/redir?resid=7EFCEC9C69BC7699!1167&authkey=!ACwunu8El4_Y-lE&ithint=file%2cdocx");
+        }
     }
 }
