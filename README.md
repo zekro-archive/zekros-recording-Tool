@@ -14,6 +14,9 @@ Zusätzliche Funktionen (seit v0.2.0124a):
 - Start der festgelegten Aufnahmeprogramme über den Button
 - Zeit-Marker hinzufügen mit Hotkeys
 
+(seit v0.3.0230a):
+- Neuer (einstellbarer) Algorithmus für die Hotkeys
+
 ---
 
 ####WICHTIG
