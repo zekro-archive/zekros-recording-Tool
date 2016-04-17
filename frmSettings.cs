@@ -19,6 +19,7 @@ namespace recTimer
         public static string recFolder;
         public static bool updates;
         public static bool showMessageCheckAlternateHookSetting = true;
+        public static int timerMarkAfter;
         globalKeyboardHook hook = new globalKeyboardHook();
 
         public frmSettings()
@@ -77,7 +78,18 @@ namespace recTimer
                 cbAlternateHook.Checked = false;
             }
 
+            if (Convert.ToBoolean(Settings.Default["alwaysOnTop"]))
+            {
+                cbAlwaysOnTop.Checked = true;
+            }
+            else
+            {
+                cbAlwaysOnTop.Checked = false;
+            }
 
+            tbTimer.Value = Convert.ToInt16(Settings.Default["timerMarker"]);
+            lbTimerMarker.Text = Convert.ToInt16(Settings.Default["timerMarker"]).ToString() + " Minuten" ;
+            timerMarkAfter = Convert.ToInt32(Settings.Default["timerMarker"]);
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -137,6 +149,10 @@ namespace recTimer
 
             Settings.Default["updates"] = cbUpdates.Checked;
             Settings.Default["alternateHook"] = cbAlternateHook.Checked;
+            Settings.Default["alwaysOnTop"] = cbAlwaysOnTop.Checked;
+
+            Settings.Default["timerMarker"] = Convert.ToInt32(tbTimer.Value);
+            timerMarkAfter = Convert.ToInt32(Settings.Default["timerMarker"]);
 
             Settings.Default.Save();
         }
@@ -194,6 +210,11 @@ namespace recTimer
                 showMessageCheckAlternateHookSetting = false;
             }
                               
+        }
+
+        private void tbTimer_Scroll(object sender, EventArgs e)
+        {
+            lbTimerMarker.Text = Convert.ToInt16(tbTimer.Value).ToString() + " Minuten";
         }
     }
 }

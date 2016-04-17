@@ -154,5 +154,29 @@ namespace recTimer.Properties {
                 this["alternateHook"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alwaysOnTop {
+            get {
+                return ((bool)(this["alwaysOnTop"]));
+            }
+            set {
+                this["alwaysOnTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int timerMarker {
+            get {
+                return ((int)(this["timerMarker"]));
+            }
+            set {
+                this["timerMarker"] = value;
+            }
+        }
     }
 }

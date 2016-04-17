@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.cbAlternateHook = new System.Windows.Forms.CheckBox();
@@ -61,6 +62,9 @@
             this.tbProgramm2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbProgramm1 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lbTimerMarker = new System.Windows.Forms.Label();
+            this.tbTimer = new System.Windows.Forms.TrackBar();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -68,6 +72,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -76,21 +82,25 @@
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTimer)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(564, 484);
+            this.tabControl1.Size = new System.Drawing.Size(564, 511);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbAlwaysOnTop);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -98,17 +108,27 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(556, 458);
+            this.tabPage1.Size = new System.Drawing.Size(556, 485);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Allgemeines";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // cbAlwaysOnTop
+            // 
+            this.cbAlwaysOnTop.AutoSize = true;
+            this.cbAlwaysOnTop.Location = new System.Drawing.Point(34, 447);
+            this.cbAlwaysOnTop.Name = "cbAlwaysOnTop";
+            this.cbAlwaysOnTop.Size = new System.Drawing.Size(197, 17);
+            this.cbAlwaysOnTop.TabIndex = 2;
+            this.cbAlwaysOnTop.Text = "Always on Top (Fenster immer oben)";
+            this.cbAlwaysOnTop.UseVisualStyleBackColor = true;
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.richTextBox1);
             this.groupBox5.Controls.Add(this.cbAlternateHook);
-            this.groupBox5.Location = new System.Drawing.Point(14, 300);
+            this.groupBox5.Location = new System.Drawing.Point(14, 281);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(527, 145);
             this.groupBox5.TabIndex = 12;
@@ -140,7 +160,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cbUpdates);
-            this.groupBox4.Location = new System.Drawing.Point(14, 234);
+            this.groupBox4.Location = new System.Drawing.Point(14, 215);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(527, 60);
             this.groupBox4.TabIndex = 11;
@@ -167,7 +187,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(14, 115);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(527, 113);
+            this.groupBox2.Size = new System.Drawing.Size(527, 94);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hotkeys";
@@ -381,7 +401,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(556, 458);
+            this.tabPage2.Size = new System.Drawing.Size(556, 485);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Software";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -496,9 +516,41 @@
             this.tbProgramm1.Size = new System.Drawing.Size(456, 20);
             this.tbProgramm1.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.lbTimerMarker);
+            this.tabPage3.Controls.Add(this.tbTimer);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(556, 485);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Timer";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lbTimerMarker
+            // 
+            this.lbTimerMarker.AutoSize = true;
+            this.lbTimerMarker.Location = new System.Drawing.Point(82, 52);
+            this.lbTimerMarker.Name = "lbTimerMarker";
+            this.lbTimerMarker.Size = new System.Drawing.Size(60, 13);
+            this.lbTimerMarker.TabIndex = 1;
+            this.lbTimerMarker.Text = "15 Minuten";
+            // 
+            // tbTimer
+            // 
+            this.tbTimer.Location = new System.Drawing.Point(22, 74);
+            this.tbTimer.Maximum = 60;
+            this.tbTimer.Name = "tbTimer";
+            this.tbTimer.Size = new System.Drawing.Size(507, 45);
+            this.tbTimer.TabIndex = 0;
+            this.tbTimer.Scroll += new System.EventHandler(this.tbTimer_Scroll);
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(438, 490);
+            this.button3.Location = new System.Drawing.Point(438, 517);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(117, 23);
             this.button3.TabIndex = 3;
@@ -508,7 +560,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(315, 490);
+            this.button1.Location = new System.Drawing.Point(315, 517);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 23);
             this.button1.TabIndex = 4;
@@ -518,7 +570,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(192, 490);
+            this.button2.Location = new System.Drawing.Point(192, 517);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(117, 23);
             this.button2.TabIndex = 5;
@@ -536,11 +588,31 @@
             this.timer2.Interval = 10;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(19, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(493, 26);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Stelle ein, nach welcher Zeit sich der Timer Rot färben soll, um zu markieren wan" +
+    "n eine Folge vorbei ist.\r\nDie Uhr stellt sich wieder auf die Standart-Farbe zurü" +
+    "ck, sobald ein Marker gesetzt wurde.\r\n";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 52);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Anzeige alle ";
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 521);
+            this.ClientSize = new System.Drawing.Size(564, 552);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
@@ -551,6 +623,7 @@
             this.Load += new System.EventHandler(this.frmSettings_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -562,6 +635,9 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTimer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -606,5 +682,11 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.CheckBox cbAlternateHook;
+        private System.Windows.Forms.CheckBox cbAlwaysOnTop;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TrackBar tbTimer;
+        private System.Windows.Forms.Label lbTimerMarker;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

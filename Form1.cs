@@ -108,6 +108,8 @@ namespace recTimer
             lbTimerSS.Text = "00";
             lbTimerMM.Text = "00";
             lbTimerHH.Text = "00";
+
+            timerColorBlack();
         }
 
         //Offen der Infopage bei aktivieren des "Info"-Linklables
@@ -126,7 +128,15 @@ namespace recTimer
             {
                 tSS = 0;
             }
-            lbTimerSS.Text = tSS.ToString();
+            
+            if (tSS < 10)
+            {
+                lbTimerSS.Text = "0" + tSS.ToString();
+            } else
+            {
+                lbTimerSS.Text = tSS.ToString();
+            }
+            
         }
         //Timer für Timer Minuten
         private void timerMM_Tick(object sender, EventArgs e)
@@ -136,13 +146,43 @@ namespace recTimer
             {
                 tMM = 0;
             }
-            lbTimerMM.Text = tMM.ToString();
+
+            if (tMM < 10)
+            {
+                lbTimerMM.Text = "0" + tMM.ToString();
+            }
+            else
+            {
+                lbTimerMM.Text = tMM.ToString();
+            }
+
+            if (   tMM     == frmSettings.timerMarkAfter 
+                || tMM / 2 == frmSettings.timerMarkAfter 
+                || tMM / 3 == frmSettings.timerMarkAfter 
+                || tMM / 4 == frmSettings.timerMarkAfter 
+                || tMM / 5 == frmSettings.timerMarkAfter 
+                || tMM / 6 == frmSettings.timerMarkAfter)
+            {
+                lbTimerHH.ForeColor = Color.Red;
+                lbTimerMM.ForeColor = Color.Red;
+                lbTimerSS.ForeColor = Color.Red;
+            }
+
         }
         //Timer für Timer Stunden
         private void timerHH_Tick(object sender, EventArgs e)
         {
             tHH = tHH + 1;
-            lbTimerHH.Text = tHH.ToString();
+
+            if (tHH < 10)
+            {
+                lbTimerHH.Text = "0" + tHH.ToString();
+            }
+            else
+            {
+                lbTimerHH.Text = tHH.ToString();
+            }
+            
         }
 
         /// <summary>
@@ -181,6 +221,22 @@ namespace recTimer
                 {
                     lbDatenträger1.ForeColor = Color.Black;
                     lbDatenträger1.Text = "Datenträger " + recHDDload + ":";
+                }
+            }
+
+            
+            if (Convert.ToBoolean(Settings.Default["alwaysOnTop"]))
+            {
+                if (TopMost == false)
+                {
+                    TopMost = true;
+                }
+            }
+            else
+            {
+                if (TopMost == true)
+                {
+                    TopMost = false;
                 }
             }
         }
@@ -654,7 +710,7 @@ namespace recTimer
         private void markAltKeyHook()
         {
             string recKeyload = Settings.Default["markKey"].ToString();
-            
+
             #region IfHellOfDOOM_2
 
                 if (recKeyload == "F1")
@@ -1168,6 +1224,8 @@ namespace recTimer
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
             numbMarks++;
 
+            timerColorBlack();
+
             e.Handled = true;
         }
         /// <summary>
@@ -1178,6 +1236,8 @@ namespace recTimer
         {
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
             numbMarks++;
+
+            timerColorBlack();
         }
 
         private void btResetMarks_Click(object sender, EventArgs e)
@@ -1231,6 +1291,12 @@ namespace recTimer
             lbUpdateWarn.Text = "";
         }
 
+        private void timerColorBlack()
+        {
+            lbTimerHH.ForeColor = Color.Black;
+            lbTimerMM.ForeColor = Color.Black;
+            lbTimerSS.ForeColor = Color.Black;
+        }
         #region EMPTY METHODS
 
         private void label3_Click(object sender, EventArgs e)
