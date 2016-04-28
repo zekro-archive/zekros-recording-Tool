@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmdRecFolder = new System.Windows.Forms.Button();
             this.cmdEinstellungen = new System.Windows.Forms.Button();
             this.cmdSoftwareStarten = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -66,12 +67,16 @@
             this.timerKeyboardHook = new System.Windows.Forms.Timer(this.components);
             this.lbVersion = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lbGlobalSS = new System.Windows.Forms.ListBox();
+            this.btPrPro = new System.Windows.Forms.Button();
             this.btSaveMarks = new System.Windows.Forms.Button();
             this.btResetMarks = new System.Windows.Forms.Button();
             this.listMarker = new System.Windows.Forms.ListBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.lbUpdateWarn = new System.Windows.Forms.LinkLabel();
             this.pcHDD = new System.Diagnostics.PerformanceCounter();
+            this.timerAutoSave = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,6 +89,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cmdRecFolder);
             this.panel1.Controls.Add(this.cmdEinstellungen);
             this.panel1.Controls.Add(this.cmdSoftwareStarten);
             this.panel1.Location = new System.Drawing.Point(3, 2);
@@ -91,11 +97,21 @@
             this.panel1.Size = new System.Drawing.Size(310, 40);
             this.panel1.TabIndex = 0;
             // 
+            // cmdRecFolder
+            // 
+            this.cmdRecFolder.Location = new System.Drawing.Point(107, 6);
+            this.cmdRecFolder.Name = "cmdRecFolder";
+            this.cmdRecFolder.Size = new System.Drawing.Size(94, 25);
+            this.cmdRecFolder.TabIndex = 2;
+            this.cmdRecFolder.Text = "Aufnahmeordner";
+            this.cmdRecFolder.UseVisualStyleBackColor = true;
+            this.cmdRecFolder.Click += new System.EventHandler(this.cmdRecFolder_Click);
+            // 
             // cmdEinstellungen
             // 
-            this.cmdEinstellungen.Location = new System.Drawing.Point(165, 6);
+            this.cmdEinstellungen.Location = new System.Drawing.Point(207, 6);
             this.cmdEinstellungen.Name = "cmdEinstellungen";
-            this.cmdEinstellungen.Size = new System.Drawing.Size(135, 25);
+            this.cmdEinstellungen.Size = new System.Drawing.Size(93, 25);
             this.cmdEinstellungen.TabIndex = 1;
             this.cmdEinstellungen.Text = "Einstellungen";
             this.cmdEinstellungen.UseVisualStyleBackColor = true;
@@ -103,9 +119,9 @@
             // 
             // cmdSoftwareStarten
             // 
-            this.cmdSoftwareStarten.Location = new System.Drawing.Point(9, 6);
+            this.cmdSoftwareStarten.Location = new System.Drawing.Point(7, 6);
             this.cmdSoftwareStarten.Name = "cmdSoftwareStarten";
-            this.cmdSoftwareStarten.Size = new System.Drawing.Size(135, 25);
+            this.cmdSoftwareStarten.Size = new System.Drawing.Size(94, 25);
             this.cmdSoftwareStarten.TabIndex = 0;
             this.cmdSoftwareStarten.Text = "Software starten";
             this.cmdSoftwareStarten.UseVisualStyleBackColor = true;
@@ -217,9 +233,8 @@
             this.lbRecTimeLeft.Enabled = false;
             this.lbRecTimeLeft.Location = new System.Drawing.Point(181, 50);
             this.lbRecTimeLeft.Name = "lbRecTimeLeft";
-            this.lbRecTimeLeft.Size = new System.Drawing.Size(13, 13);
+            this.lbRecTimeLeft.Size = new System.Drawing.Size(0, 13);
             this.lbRecTimeLeft.TabIndex = 15;
-            this.lbRecTimeLeft.Text = "0";
             // 
             // lbSpace
             // 
@@ -245,9 +260,8 @@
             this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(137, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Voll in:";
             // 
             // pbDisks
             // 
@@ -336,7 +350,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Location = new System.Drawing.Point(12, 452);
+            this.label7.Location = new System.Drawing.Point(12, 482);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 13);
             this.label7.TabIndex = 10;
@@ -345,7 +359,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(278, 452);
+            this.linkLabel2.Location = new System.Drawing.Point(278, 482);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(25, 13);
             this.linkLabel2.TabIndex = 11;
@@ -393,7 +407,7 @@
             // 
             this.lbVersion.AutoSize = true;
             this.lbVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbVersion.Location = new System.Drawing.Point(95, 452);
+            this.lbVersion.Location = new System.Drawing.Point(95, 482);
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(83, 13);
             this.lbVersion.TabIndex = 12;
@@ -401,21 +415,53 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.lbGlobalSS);
+            this.groupBox1.Controls.Add(this.btPrPro);
             this.groupBox1.Controls.Add(this.btSaveMarks);
             this.groupBox1.Controls.Add(this.btResetMarks);
             this.groupBox1.Controls.Add(this.listMarker);
             this.groupBox1.Location = new System.Drawing.Point(3, 321);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(307, 128);
+            this.groupBox1.Size = new System.Drawing.Size(307, 155);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Marker";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(200, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Durchsuchen...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lbGlobalSS
+            // 
+            this.lbGlobalSS.FormattingEnabled = true;
+            this.lbGlobalSS.Location = new System.Drawing.Point(229, 19);
+            this.lbGlobalSS.Name = "lbGlobalSS";
+            this.lbGlobalSS.Size = new System.Drawing.Size(71, 69);
+            this.lbGlobalSS.TabIndex = 4;
+            this.lbGlobalSS.SelectedIndexChanged += new System.EventHandler(this.lbGlobalSS_SelectedIndexChanged);
+            // 
+            // btPrPro
+            // 
+            this.btPrPro.Location = new System.Drawing.Point(9, 123);
+            this.btPrPro.Name = "btPrPro";
+            this.btPrPro.Size = new System.Drawing.Size(184, 23);
+            this.btPrPro.TabIndex = 3;
+            this.btPrPro.Text = "Marken für PrPro-Projekt speichern";
+            this.btPrPro.UseVisualStyleBackColor = true;
+            this.btPrPro.Click += new System.EventHandler(this.btPrPro_Click);
+            // 
             // btSaveMarks
             // 
-            this.btSaveMarks.Location = new System.Drawing.Point(163, 94);
+            this.btSaveMarks.Location = new System.Drawing.Point(153, 94);
             this.btSaveMarks.Name = "btSaveMarks";
-            this.btSaveMarks.Size = new System.Drawing.Size(137, 23);
+            this.btSaveMarks.Size = new System.Drawing.Size(147, 23);
             this.btSaveMarks.TabIndex = 2;
             this.btSaveMarks.Text = "Marken speichern...";
             this.btSaveMarks.UseVisualStyleBackColor = true;
@@ -436,7 +482,7 @@
             this.listMarker.FormattingEnabled = true;
             this.listMarker.Location = new System.Drawing.Point(9, 19);
             this.listMarker.Name = "listMarker";
-            this.listMarker.Size = new System.Drawing.Size(291, 69);
+            this.listMarker.Size = new System.Drawing.Size(214, 69);
             this.listMarker.TabIndex = 0;
             // 
             // folderBrowserDialog1
@@ -447,7 +493,7 @@
             // 
             this.lbUpdateWarn.AutoSize = true;
             this.lbUpdateWarn.LinkColor = System.Drawing.Color.Red;
-            this.lbUpdateWarn.Location = new System.Drawing.Point(213, 452);
+            this.lbUpdateWarn.Location = new System.Drawing.Point(213, 482);
             this.lbUpdateWarn.Name = "lbUpdateWarn";
             this.lbUpdateWarn.Size = new System.Drawing.Size(0, 13);
             this.lbUpdateWarn.TabIndex = 14;
@@ -459,11 +505,16 @@
             this.pcHDD.CounterName = "Vom Dateisystem geschriebene Bytes";
             this.pcHDD.InstanceName = "_Total";
             // 
+            // timerAutoSave
+            // 
+            this.timerAutoSave.Interval = 30000;
+            this.timerAutoSave.Tick += new System.EventHandler(this.timerAutoSave_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(315, 474);
+            this.ClientSize = new System.Drawing.Size(315, 505);
             this.Controls.Add(this.lbUpdateWarn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbVersion);
@@ -475,6 +526,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "zekro\'s Recording Tool";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -538,6 +590,11 @@
         private System.Windows.Forms.LinkLabel lbUpdateWarn;
         private System.Windows.Forms.Label lbRecTimeLeft;
         private System.Diagnostics.PerformanceCounter pcHDD;
+        private System.Windows.Forms.Button cmdRecFolder;
+        private System.Windows.Forms.Timer timerAutoSave;
+        private System.Windows.Forms.Button btPrPro;
+        private System.Windows.Forms.ListBox lbGlobalSS;
+        private System.Windows.Forms.Button button1;
     }
 }
 

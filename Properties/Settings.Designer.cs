@@ -25,7 +25,7 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C")]
         public string recHDD {
             get {
                 return ((string)(this["recHDD"]));
@@ -37,7 +37,7 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F4")]
         public string recKey {
             get {
                 return ((string)(this["recKey"]));
@@ -49,7 +49,7 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<leer>")]
         public string recFolder {
             get {
                 return ((string)(this["recFolder"]));
@@ -61,7 +61,7 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F12")]
         public string markKey {
             get {
                 return ((string)(this["markKey"]));
@@ -176,6 +176,174 @@ namespace recTimer.Properties {
             }
             set {
                 this["timerMarker"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("460")]
+        public int BUILDCOUNTER {
+            get {
+                return ((int)(this["BUILDCOUNTER"]));
+            }
+            set {
+                this["BUILDCOUNTER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool autoSave {
+            get {
+                return ((bool)(this["autoSave"]));
+            }
+            set {
+                this["autoSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string timerToTXT {
+            get {
+                return ((string)(this["timerToTXT"]));
+            }
+            set {
+                this["timerToTXT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool timerToTXTtoggle {
+            get {
+                return ((bool)(this["timerToTXTtoggle"]));
+            }
+            set {
+                this["timerToTXTtoggle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string leftToTXT {
+            get {
+                return ((string)(this["leftToTXT"]));
+            }
+            set {
+                this["leftToTXT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool leftToTXTtoggle {
+            get {
+                return ((bool)(this["leftToTXTtoggle"]));
+            }
+            set {
+                this["leftToTXTtoggle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string rightToTXT {
+            get {
+                return ((string)(this["rightToTXT"]));
+            }
+            set {
+                this["rightToTXT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool rightToTXTtoggle {
+            get {
+                return ((bool)(this["rightToTXTtoggle"]));
+            }
+            set {
+                this["rightToTXTtoggle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long rightCounter {
+            get {
+                return ((long)(this["rightCounter"]));
+            }
+            set {
+                this["rightCounter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long leftCounter {
+            get {
+                return ((long)(this["leftCounter"]));
+            }
+            set {
+                this["leftCounter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string inputPath {
+            get {
+                return ((string)(this["inputPath"]));
+            }
+            set {
+                this["inputPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string outputPath {
+            get {
+                return ((string)(this["outputPath"]));
+            }
+            set {
+                this["outputPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string FPS {
+            get {
+                return ((string)(this["FPS"]));
+            }
+            set {
+                this["FPS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DEVELOPER {
+            get {
+                return ((bool)(this["DEVELOPER"]));
+            }
+            set {
+                this["DEVELOPER"] = value;
             }
         }
     }
