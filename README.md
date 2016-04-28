@@ -17,6 +17,15 @@ Zusätzliche Funktionen (seit v0.2.0124a):
 (seit v0.3.0230a):
 - Neuer (einstellbarer) Algorithmus für die Hotkeys
 
+(seit v0.6.0463a):
+- Markerimport für Premiere Pro Projekte
+- Maustastencounter
+- Live-Streaming der Kickcounter in Textdatei für OBS
+- Live-Streaming der Timer-Zeit in Textdatei für OBS
+- Autosave der Marker
+- Alaways on Top - Funktion
+- Eingestellter Aufnahmeordner kann über Button geöffnet werden
+
 ---
 
 ####WICHTIG
