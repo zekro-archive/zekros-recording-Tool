@@ -45,7 +45,6 @@ Hier siehst du einige Screenshots der neusten Version des Programms: http://imgu
 ####WAS WIRD NOCH IMPLEMENTIERT?
 
 - Anzeige wie lange es noch dauert bis die Platte voll ist
-- Zugriff auf den Aufnahmeordner vom Programm aus
 
 ---
 
