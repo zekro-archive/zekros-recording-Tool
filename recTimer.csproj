@@ -82,19 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsConst.cs" />
-    <Compile Include="clsMouseHook.cs" />
     <Compile Include="clsUpdate.cs" />
     <Compile Include="frmInfo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmInfo.Designer.cs">
       <DependentUpon>frmInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmPrPro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPrPro.Designer.cs">
-      <DependentUpon>frmPrPro.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSettings.cs">
       <SubType>Form</SubType>
@@ -116,9 +109,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmInfo.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPrPro.resx">
-      <DependentUpon>frmPrPro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>

@@ -81,7 +81,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-bin/Debug/project.xml
-bin/Debug/klick.txt
-*.xml
-bin/Debug/test.xml

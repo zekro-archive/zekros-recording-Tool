@@ -4,7 +4,7 @@
   <description asmv2:iconFile="logo zekrectool.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="recTimer" version="0.4.451.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="recTimer" version="0.4.257.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="recTimer.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="455144">
-      <assemblyIdentity name="recTimer" version="0.4.451.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="432616">
+      <assemblyIdentity name="recTimer" version="0.4.257.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Oa8AwEsr2KMUYyWYxYJtWybUYZl3/RWRrRP+My+IoIQ=</dsig:DigestValue>
+        <dsig:DigestValue>QguD534x9e98g2IX57J0zpz1v+7bHg2yL6K87bNXWio=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,13 +63,13 @@
       <dsig:DigestValue>5TTUWreaJYBLbuYKAvUmYclohAATxmpKYOzkXG3EWko=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="recTimer.exe.config" size="4012">
+  <file name="recTimer.exe.config" size="2293">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4paWmYM0p0pFGu10DrQc0tstO5naDlweC5iVw0k8mak=</dsig:DigestValue>
+      <dsig:DigestValue>EDh6F+Lb5SjHbS8HF9+CmexwAwS8B2mmm/QrmffuXGA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

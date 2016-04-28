@@ -26,5 +26,3 @@ C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\recTimer - Kopie\r
 C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\recTimer - Kopie\recTimer\obj\Debug\recTimer.csproj.GenerateResource.Cache
 C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\recTimer - Kopie\recTimer\obj\Debug\recTimer.exe.manifest
 C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\recTimer - Kopie\recTimer\obj\Debug\recTimer.application
-C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.frmPrPro.resources
-C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\recTimer\recTimer\obj\Debug\recTimer.csprojResolveAssemblyReference.cache

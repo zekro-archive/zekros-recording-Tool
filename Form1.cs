@@ -12,8 +12,7 @@ using System.Diagnostics;
 using recTimer.Properties;
 using System.Threading;
 using System.Runtime.InteropServices;
-using System.Xml;
-using System.Xml.Linq;
+
 
 namespace recTimer
 {
@@ -21,9 +20,10 @@ namespace recTimer
     {
 
         #region vars
-        int tSS = 0, tMM = 0, tHH = 0;
-        public static int globalSS = 0;
-        public static int numbMarks = 1;
+        int tSS = 0;
+        int tMM = 0;
+        int tHH = 0;
+        int numbMarks = 1;
         bool keyWasPressed = false;
 
         [DllImport("user32.dll")]
@@ -31,13 +31,6 @@ namespace recTimer
 
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        static extern uint SendMessage(IntPtr hWnd, uint Msg, uint wParam, uint lParam);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
 
         globalKeyboardHook hook = new globalKeyboardHook();
 
@@ -49,25 +42,21 @@ namespace recTimer
         public Form1()
         {
             InitializeComponent();
-
-            clsMouseHookLEFT.Start();
-            clsMouseHookLEFT.MouseAction += new EventHandler(EventMouseLEFT);
-            clsMouseHookRIGHT.Start();
-            clsMouseHookRIGHT.MouseAction += new EventHandler(EventMouseRIGHT);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DEVELOPERMODE();
-            ShowToolTip();
+            //Je nach Einstellung wird die globalkeyhook oder alternative Hook aktiviert.
+            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            {
+                recAltKeyHook();
+                markAltKeyHook();
+            }
+            else {
+                timerKeyboardHook.Start();
+            }
 
-            //Settings.Default["BUILDCOUNTER"] = 461;
-
-            frmSettings.timerToTextPATH = Settings.Default["timerToTXT"].ToString();
-
-            timerKeyboardHook.Start();
             timerCPU.Start();
-            timerAutoSave.Start();
             lbVersion.Text = "preAlpha v." + clsConst.buildVersion + "a";
 
             //Wenn Updatenotification aktiviert ist wird der Update testausgeführt, sonst Warnung.
@@ -78,22 +67,15 @@ namespace recTimer
             {
                 lbUpdateWarn.Text = "WARNUNG!";
             }
-
-            buildCounter();
-
-            //COUNTERS
-            frmSettings.leftCounter = Convert.ToInt64(Settings.Default["leftCounter"]);
-            frmSettings.rightCounter = Convert.ToInt64(Settings.Default["rightCounter"]);
-
         }
 
         //Alternative Hotkey Hook
         protected override void WndProc(ref Message m)
         {
-
+            
             if (Convert.ToBoolean(Settings.Default["alternateHook"]))
             {
-
+            
                 if (m.Msg == WM_HOTKEY && (int)m.WParam == 1)
                 {
                     hookAlt_keyUp();
@@ -103,12 +85,12 @@ namespace recTimer
                     hookAlt_keyUpMark();
                 }
                 base.WndProc(ref m);
-
+            
             } else
             {
                 base.WndProc(ref m);
             }
-
+            
         }
 
         private void cmdEinstellungen_Click(object sender, EventArgs e)
@@ -126,7 +108,6 @@ namespace recTimer
             lbTimerSS.Text = "00";
             lbTimerMM.Text = "00";
             lbTimerHH.Text = "00";
-            globalSS = 0;
 
             timerColorBlack();
         }
@@ -147,7 +128,7 @@ namespace recTimer
             {
                 tSS = 0;
             }
-
+            
             if (tSS < 10)
             {
                 lbTimerSS.Text = "0" + tSS.ToString();
@@ -155,11 +136,7 @@ namespace recTimer
             {
                 lbTimerSS.Text = tSS.ToString();
             }
-
-            if (Convert.ToBoolean(Settings.Default["timerToTXTtoggle"]))
-                timerToTXT();
-
-            globalSS++;
+            
         }
         //Timer für Timer Minuten
         private void timerMM_Tick(object sender, EventArgs e)
@@ -179,11 +156,11 @@ namespace recTimer
                 lbTimerMM.Text = tMM.ToString();
             }
 
-            if (tMM == frmSettings.timerMarkAfter
-                || tMM / 2 == frmSettings.timerMarkAfter
-                || tMM / 3 == frmSettings.timerMarkAfter
-                || tMM / 4 == frmSettings.timerMarkAfter
-                || tMM / 5 == frmSettings.timerMarkAfter
+            if (   tMM     == frmSettings.timerMarkAfter 
+                || tMM / 2 == frmSettings.timerMarkAfter 
+                || tMM / 3 == frmSettings.timerMarkAfter 
+                || tMM / 4 == frmSettings.timerMarkAfter 
+                || tMM / 5 == frmSettings.timerMarkAfter 
                 || tMM / 6 == frmSettings.timerMarkAfter)
             {
                 lbTimerHH.ForeColor = Color.Red;
@@ -205,7 +182,7 @@ namespace recTimer
             {
                 lbTimerHH.Text = tHH.ToString();
             }
-
+            
         }
 
         /// <summary>
@@ -213,6 +190,7 @@ namespace recTimer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        
         private void timerCPU_Tick(object sender, EventArgs e)
         {
             int CPUload = Convert.ToInt16(pcCPU.NextValue());
@@ -246,6 +224,7 @@ namespace recTimer
                 }
             }
 
+            
             if (Convert.ToBoolean(Settings.Default["alwaysOnTop"]))
             {
                 if (TopMost == false)
@@ -261,7 +240,6 @@ namespace recTimer
                 }
             }
         }
-
         /// <summary>
         /// Timer und aktualisierung der Regestrierung des eingestellten Keyboard-Hotkeys und der Keyboard Hook.
         /// </summary>
@@ -269,37 +247,8 @@ namespace recTimer
         /// <param name="e"></param>
         private void timerKeyboardHook_Tick(object sender, EventArgs e)
         {
-            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
-            {
-                recAltKeyHook();
-                markAltKeyHook();
-            }
-            else {
-                //timerKeyboardHook.Start();
-                recKeyHook();
-                markKeyHook();
-            }
-
-
-
-
-            
-        }
-
-        private void timerAutoSave_Tick(object sender, EventArgs e)
-        {
-            if (Convert.ToBoolean(Settings.Default["autoSave"]))
-            {
-                StreamWriter Writer = new StreamWriter(@"[AUTOSAVE] saved_marks.txt");
-
-                foreach (var item in listMarker.Items)
-                {
-                    Writer.WriteLine(item.ToString());
-                }
-                Writer.Close();
-
-                Console.WriteLine("AUTOSAVED MARKERS.");
-            }
+            recKeyHook();
+            markKeyHook();
         }
         #endregion
 
@@ -313,221 +262,220 @@ namespace recTimer
 
             #region IfHellOfDOOM
 
-            if (recKeyload == "F1")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F1);
-            }
-            else if (recKeyload == "F2")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F2);
-            }
-            else if (recKeyload == "F3")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F3);
-            }
-            else if (recKeyload == "F4")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
-            }
-            else if (recKeyload == "F5")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F5);
-            }
-            else if (recKeyload == "F6")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F6);
-            }
-            else if (recKeyload == "F7")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F7);
-            }
-            else if (recKeyload == "F8")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F8);
-            }
-            else if (recKeyload == "F9")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F9);
-            }
-            else if (recKeyload == "F10")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F10);
-            }
-            else if (recKeyload == "F11")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F11);
-            }
-            else if (recKeyload == "F12")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F12);
-            }
+                if (recKeyload == "F1")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F1);
+                }
+                else if (recKeyload == "F2")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F2);
+                }
+                else if (recKeyload == "F3")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F3);
+                }
+                else if (recKeyload == "F4")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
+                }
+                else if (recKeyload == "F5")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F5);
+                }
+                else if (recKeyload == "F6")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F6);
+                }
+                else if (recKeyload == "F7")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F7);
+                }
+                else if (recKeyload == "F8")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F8);
+                }
+                else if (recKeyload == "F9")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F9);
+                }
+                else if (recKeyload == "F10")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F10);
+                }
+                else if (recKeyload == "F11")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F11);
+                }
+                else if (recKeyload == "F12")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F12);
+                }
 
-            else if (recKeyload == "A")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.A);
-            }
-            else if (recKeyload == "B")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.B);
-            }
-            else if (recKeyload == "C")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Z);
-            }
-            else if (recKeyload == "D")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.D);
-            }
-            else if (recKeyload == "E")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.E);
-            }
-            else if (recKeyload == "F")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F);
-            }
-            else if (recKeyload == "G")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.G);
-            }
-            else if (recKeyload == "H")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.H);
-            }
-            else if (recKeyload == "I")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.I);
-            }
-            else if (recKeyload == "J")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.J);
-            }
-            else if (recKeyload == "K")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.K);
-            }
-            else if (recKeyload == "L")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.L);
-            }
-            else if (recKeyload == "M")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.M);
-            }
-            else if (recKeyload == "N")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.N);
-            }
-            else if (recKeyload == "O")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.O);
-            }
-            else if (recKeyload == "P")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.P);
-            }
-            else if (recKeyload == "Q")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Q);
-            }
-            else if (recKeyload == "R")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.R);
-            }
-            else if (recKeyload == "S")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.S);
-            }
-            else if (recKeyload == "T")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.T);
-            }
-            else if (recKeyload == "U")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.U);
-            }
-            else if (recKeyload == "V")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.V);
-            }
-            else if (recKeyload == "W")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.W);
-            }
-            else if (recKeyload == "X")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.X);
-            }
-            else if (recKeyload == "Y")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Y);
-            }
-            else if (recKeyload == "Z")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.C);
-            }
+                else if (recKeyload == "A")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.A);
+                }
+                else if (recKeyload == "B")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.B);
+                }
+                else if (recKeyload == "C")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Z);
+                }
+                else if (recKeyload == "D")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.D);
+                }
+                else if (recKeyload == "E")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.E);
+                }
+                else if (recKeyload == "F")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F);
+                }
+                else if (recKeyload == "G")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.G);
+                }
+                else if (recKeyload == "H")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.H);
+                }
+                else if (recKeyload == "I")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.I);
+                }
+                else if (recKeyload == "J")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.J);
+                }
+                else if (recKeyload == "K")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.K);
+                }
+                else if (recKeyload == "L")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.L);
+                }
+                else if (recKeyload == "M")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.M);
+                }
+                else if (recKeyload == "N")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.N);
+                }
+                else if (recKeyload == "O")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.O);
+                }
+                else if (recKeyload == "P")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.P);
+                }
+                else if (recKeyload == "Q")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Q);
+                }
+                else if (recKeyload == "R")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.R);
+                }
+                else if (recKeyload == "S")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.S);
+                }
+                else if (recKeyload == "T")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.T);
+                }
+                else if (recKeyload == "U")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.U);
+                }
+                else if (recKeyload == "V")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.V);
+                }
+                else if (recKeyload == "W")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.W);
+                }
+                else if (recKeyload == "X")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.X);
+                }
+                else if (recKeyload == "Y")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Y);
+                }
+                else if (recKeyload == "Z")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.C);
+                }
 
-            else if (recKeyload == "NumPad1")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad1);
-            }
-            else if (recKeyload == "NumPad2")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad2);
-            }
-            else if (recKeyload == "NumPad3")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad3);
-            }
-            else if (recKeyload == "NumPad4")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad4);
-            }
-            else if (recKeyload == "NumPad5")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad5);
-            }
-            else if (recKeyload == "NumPad6")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad6);
-            }
-            else if (recKeyload == "NumPad7")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad7);
-            }
-            else if (recKeyload == "NumPad18")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad8);
-            }
-            else if (recKeyload == "NumPad9")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad9);
-            }
-            else if (recKeyload == "NumPad0")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad0);
-            }
+                else if (recKeyload == "NumPad1")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad1);
+                }
+                else if (recKeyload == "NumPad2")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad2);
+                }
+                else if (recKeyload == "NumPad3")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad3);
+                }
+                else if (recKeyload == "NumPad4")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad4);
+                }
+                else if (recKeyload == "NumPad5")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad5);
+                }
+                else if (recKeyload == "NumPad6")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad6);
+                }
+                else if (recKeyload == "NumPad7")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad7);
+                }
+                else if (recKeyload == "NumPad18")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad8);
+                }
+                else if (recKeyload == "NumPad9")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad9);
+                }
+                else if (recKeyload == "NumPad0")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.NumPad0);
+                }
 
-            else if (recKeyload == "Add")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Add);
-            }
-            else if (recKeyload == "Substract")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Subtract);
-            }
-            else if (recKeyload == "Multiply")
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Multiply);
-            }
+                else if (recKeyload == "Add")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Add);
+                }
+                else if (recKeyload == "Substract")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Subtract);
+                }
+                else if (recKeyload == "Multiply")
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.Multiply);
+                }
 
-            else
-            {
-                RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
-            }
+                else
+                {
+                    RegisterHotKey(this.Handle, 1, MOD_CONTROL, (int)Keys.F4);
+                }
             #endregion
         }
-
         /// <summary>
         /// Bei Aktivierung des Hotkeys für Timer.
         /// [Für die alternative Keyboard Hook]
@@ -765,221 +713,220 @@ namespace recTimer
 
             #region IfHellOfDOOM_2
 
-            if (recKeyload == "F1")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F1);
-            }
-            else if (recKeyload == "F2")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F2);
-            }
-            else if (recKeyload == "F3")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F3);
-            }
-            else if (recKeyload == "F4")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
-            }
-            else if (recKeyload == "F5")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F5);
-            }
-            else if (recKeyload == "F6")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F6);
-            }
-            else if (recKeyload == "F7")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F7);
-            }
-            else if (recKeyload == "F8")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F8);
-            }
-            else if (recKeyload == "F9")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F9);
-            }
-            else if (recKeyload == "F10")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F10);
-            }
-            else if (recKeyload == "F11")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F11);
-            }
-            else if (recKeyload == "F12")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F12);
-            }
+                if (recKeyload == "F1")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F1);
+                }
+                else if (recKeyload == "F2")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F2);
+                }
+                else if (recKeyload == "F3")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F3);
+                }
+                else if (recKeyload == "F4")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
+                }
+                else if (recKeyload == "F5")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F5);
+                }
+                else if (recKeyload == "F6")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F6);
+                }
+                else if (recKeyload == "F7")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F7);
+                }
+                else if (recKeyload == "F8")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F8);
+                }
+                else if (recKeyload == "F9")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F9);
+                }
+                else if (recKeyload == "F10")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F10);
+                }
+                else if (recKeyload == "F11")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F11);
+                }
+                else if (recKeyload == "F12")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F12);
+                }
 
-            else if (recKeyload == "A")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.A);
-            }
-            else if (recKeyload == "B")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.B);
-            }
-            else if (recKeyload == "C")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Z);
-            }
-            else if (recKeyload == "D")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.D);
-            }
-            else if (recKeyload == "E")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.E);
-            }
-            else if (recKeyload == "F")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F);
-            }
-            else if (recKeyload == "G")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.G);
-            }
-            else if (recKeyload == "H")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.H);
-            }
-            else if (recKeyload == "I")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.I);
-            }
-            else if (recKeyload == "J")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.J);
-            }
-            else if (recKeyload == "K")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.K);
-            }
-            else if (recKeyload == "L")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.L);
-            }
-            else if (recKeyload == "M")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.M);
-            }
-            else if (recKeyload == "N")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.N);
-            }
-            else if (recKeyload == "O")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.O);
-            }
-            else if (recKeyload == "P")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.P);
-            }
-            else if (recKeyload == "Q")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Q);
-            }
-            else if (recKeyload == "R")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.R);
-            }
-            else if (recKeyload == "S")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.S);
-            }
-            else if (recKeyload == "T")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.T);
-            }
-            else if (recKeyload == "U")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.U);
-            }
-            else if (recKeyload == "V")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.V);
-            }
-            else if (recKeyload == "W")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.W);
-            }
-            else if (recKeyload == "X")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.X);
-            }
-            else if (recKeyload == "Y")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Y);
-            }
-            else if (recKeyload == "Z")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.C);
-            }
+                else if (recKeyload == "A")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.A);
+                }
+                else if (recKeyload == "B")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.B);
+                }
+                else if (recKeyload == "C")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Z);
+                }
+                else if (recKeyload == "D")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.D);
+                }
+                else if (recKeyload == "E")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.E);
+                }
+                else if (recKeyload == "F")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F);
+                }
+                else if (recKeyload == "G")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.G);
+                }
+                else if (recKeyload == "H")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.H);
+                }
+                else if (recKeyload == "I")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.I);
+                }
+                else if (recKeyload == "J")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.J);
+                }
+                else if (recKeyload == "K")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.K);
+                }
+                else if (recKeyload == "L")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.L);
+                }
+                else if (recKeyload == "M")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.M);
+                }
+                else if (recKeyload == "N")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.N);
+                }
+                else if (recKeyload == "O")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.O);
+                }
+                else if (recKeyload == "P")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.P);
+                }
+                else if (recKeyload == "Q")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Q);
+                }
+                else if (recKeyload == "R")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.R);
+                }
+                else if (recKeyload == "S")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.S);
+                }
+                else if (recKeyload == "T")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.T);
+                }
+                else if (recKeyload == "U")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.U);
+                }
+                else if (recKeyload == "V")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.V);
+                }
+                else if (recKeyload == "W")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.W);
+                }
+                else if (recKeyload == "X")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.X);
+                }
+                else if (recKeyload == "Y")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Y);
+                }
+                else if (recKeyload == "Z")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.C);
+                }
 
-            else if (recKeyload == "NumPad1")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad1);
-            }
-            else if (recKeyload == "NumPad2")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad2);
-            }
-            else if (recKeyload == "NumPad3")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad3);
-            }
-            else if (recKeyload == "NumPad4")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad4);
-            }
-            else if (recKeyload == "NumPad5")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad5);
-            }
-            else if (recKeyload == "NumPad6")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad6);
-            }
-            else if (recKeyload == "NumPad7")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad7);
-            }
-            else if (recKeyload == "NumPad18")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad8);
-            }
-            else if (recKeyload == "NumPad9")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad9);
-            }
-            else if (recKeyload == "NumPad0")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad0);
-            }
+                else if (recKeyload == "NumPad1")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad1);
+                }
+                else if (recKeyload == "NumPad2")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad2);
+                }
+                else if (recKeyload == "NumPad3")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad3);
+                }
+                else if (recKeyload == "NumPad4")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad4);
+                }
+                else if (recKeyload == "NumPad5")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad5);
+                }
+                else if (recKeyload == "NumPad6")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad6);
+                }
+                else if (recKeyload == "NumPad7")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad7);
+                }
+                else if (recKeyload == "NumPad18")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad8);
+                }
+                else if (recKeyload == "NumPad9")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad9);
+                }
+                else if (recKeyload == "NumPad0")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.NumPad0);
+                }
 
-            else if (recKeyload == "Add")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Add);
-            }
-            else if (recKeyload == "Substract")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Subtract);
-            }
-            else if (recKeyload == "Multiply")
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Multiply);
-            }
+                else if (recKeyload == "Add")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Add);
+                }
+                else if (recKeyload == "Substract")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Subtract);
+                }
+                else if (recKeyload == "Multiply")
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.Multiply);
+                }
 
-            else
-            {
-                RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
-            }
+                else
+                {
+                    RegisterHotKey(this.Handle, 2, MOD_CONTROL, (int)Keys.F4);
+                }
             #endregion
         }
-
         /// <summary>
         /// Bei Aktivierung des Hotkeys für Marker setzten.
         /// [Für die alternative Keyboard Hook]
@@ -1238,7 +1185,6 @@ namespace recTimer
 
             e.Handled = true;
         }
-
         /// <summary>
         /// HOOK KEYDOWN EVENT RECORDING
         /// [ALTERNATIVE KEY HOOK]
@@ -1278,13 +1224,10 @@ namespace recTimer
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
             numbMarks++;
 
-            lbGlobalSS.Items.Add(globalSS);
-
             timerColorBlack();
 
             e.Handled = true;
         }
-
         /// <summary>
         /// HOOK KEYDOWN EVENT MARKING
         /// [ALTERNATE KEY HOOK]
@@ -1294,9 +1237,6 @@ namespace recTimer
             listMarker.Items.Add(numbMarks + " - " + lbTimerHH.Text + ":" + lbTimerMM.Text + ":" + lbTimerSS.Text);
             numbMarks++;
 
-            
-            lbGlobalSS.Items.Add(globalSS);
-
             timerColorBlack();
         }
 
@@ -1304,31 +1244,6 @@ namespace recTimer
         {
             listMarker.Items.Clear();
             numbMarks = 1;
-            lbGlobalSS.Items.Clear();
-        }
-
-        private void btPrPro_Click(object sender, EventArgs e)
-        {
-            if (Settings.Default["inputPath"].ToString() == "" || Settings.Default["outputPath"].ToString() == "" || Settings.Default["FPS"].ToString() == "")
-            {
-                MessageBox.Show("Bitte tätigen sie erst die Einstellungen zu dieser Funktion [Durchsuchen...] um fortfahren zu können!");
-            }
-            else
-            {
-                xmlInjector(Settings.Default["inputPath"].ToString(), Settings.Default["outputPath"].ToString(), Convert.ToInt16(Settings.Default["FPS"]));
-            }
-        }
-
-        private void cmdRecFolder_Click(object sender, EventArgs e)
-        {
-            string rf = Settings.Default["recFolder"].ToString();
-
-            if (Directory.Exists(rf))
-            {
-                Process.Start("explorer.exe", rf);
-            }
-            else
-                MessageBox.Show("Der eingestellte Aufnahmepfad existiert nicht oder es wurde noch kein Aufnahmepfad eingestellt!");
         }
 
         private void btSaveMarks_Click(object sender, EventArgs e)
@@ -1337,7 +1252,7 @@ namespace recTimer
 
             StreamWriter Writer = new StreamWriter(folderBrowserDialog1.SelectedPath + @"\saved_marks.txt");
 
-            foreach (var item in listMarker.Items)
+            foreach(var item in listMarker.Items)
             {
                 Writer.WriteLine(item.ToString());
             }
@@ -1348,37 +1263,26 @@ namespace recTimer
 
         private void cmdSoftwareStarten_Click(object sender, EventArgs e)
         {
-            if (Settings.Default["programm1"].ToString() != ""
-                && Settings.Default["programm2"].ToString() != ""
-                && Settings.Default["programm3"].ToString() != ""
-                && Settings.Default["programm4"].ToString() != ""
-                && Settings.Default["programm5"].ToString() != "")
+            if (Settings.Default["programm1"].ToString() != "")
             {
-                if (Settings.Default["programm1"].ToString() != "")
-                {
-                    Process.Start(Settings.Default["programm1"].ToString());
-                }
-                if (Settings.Default["programm2"].ToString() != "")
-                {
-                    Process.Start(Settings.Default["programm2"].ToString());
-                }
-                if (Settings.Default["programm3"].ToString() != "")
-                {
-                    Process.Start(Settings.Default["programm3"].ToString());
-                }
-                if (Settings.Default["programm4"].ToString() != "")
-                {
-                    Process.Start(Settings.Default["programm4"].ToString());
-                }
-                if (Settings.Default["programm5"].ToString() != "")
-                {
-                    Process.Start(Settings.Default["programm5"].ToString());
-                }
+                Process.Start(Settings.Default["programm1"].ToString());
             }
-            else
-                MessageBox.Show("Es wurde keine Aufnahmeprogramme eingestellt!");
-
-            
+            if (Settings.Default["programm2"].ToString() != "")
+            {
+                Process.Start(Settings.Default["programm2"].ToString());
+            }
+            if (Settings.Default["programm3"].ToString() != "")
+            {
+                Process.Start(Settings.Default["programm3"].ToString());
+            }
+            if (Settings.Default["programm4"].ToString() != "")
+            {
+                Process.Start(Settings.Default["programm4"].ToString());
+            }
+            if (Settings.Default["programm5"].ToString() != "")
+            {
+                Process.Start(Settings.Default["programm5"].ToString());
+            }
         }
 
         private void lbUpdateWarn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1393,159 +1297,10 @@ namespace recTimer
             lbTimerMM.ForeColor = Color.Black;
             lbTimerSS.ForeColor = Color.Black;
         }
-
-        private void DEVELOPERMODE()
-        {
-            if (Convert.ToBoolean(Settings.Default["DEVELOPER"]))
-            {
-                AllocConsole();
-                Console.WriteLine("DEVELOPERMODE ACTIVATED");
-            }
-        }
-
-        private void buildCounter()
-        {
-            int BUILDCOUNTER = Convert.ToInt32(Settings.Default["BUILDCOUNTER"]);
-            BUILDCOUNTER++;
-            Console.WriteLine("BUILD #" + BUILDCOUNTER);
-            Settings.Default["BUILDCOUNTER"] = BUILDCOUNTER;
-
-            Settings.Default.Save();
-        }
-
-        private void ShowToolTip()
-        {
-            ToolTip toolTip1 = new ToolTip();
-            toolTip1.AutoPopDelay = 5000;
-            toolTip1.InitialDelay = 1000;
-            toolTip1.ReshowDelay = 500;
-            toolTip1.ShowAlways = true;
-
-            toolTip1.SetToolTip(this.btReset, "Resetet den Timer.");
-            toolTip1.SetToolTip(this.cmdEinstellungen, "RÖffnet die Einstellungen.");
-            toolTip1.SetToolTip(this.cmdSoftwareStarten, "Öffnet die eingestellte Software mit nur eimen Klick! ;D");
-            toolTip1.SetToolTip(this.cmdRecFolder, "Öffnet den eingestellten Aufnahmeordner.");
-        }
-
-        private void timerToTXT()
-        {
-            string HH, MM, SS;
-
-            if (tSS < 10)
-                SS = "0" + tSS.ToString();
-            else
-                SS = tSS.ToString();
-
-            if (tMM < 10)
-                MM = "0" + tMM.ToString();
-            else
-                MM = tMM.ToString();
-
-            if (tHH < 10)
-                HH = "0" + tHH.ToString();
-            else
-                HH = tHH.ToString();
-
-            if (frmSettings.timerToTextPATH != "")
-            {
-                StreamWriter Writer = new StreamWriter(frmSettings.timerToTextPATH + @"\timer.txt");
-                Writer.WriteLine(HH + ":" + MM + ":" + SS);
-                Writer.Close();
-            }            
-        }
-
-        /// <summary> TO DO
-        /// Speicherung der Zahl der Mausklicks in eine textdatei nach jedem Mausklick.
-        /// Textdatei pfad aus den Einstellungen wenn der Haken aktiviert ist.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EventMouseLEFT(object sender, EventArgs e)
-        {
-            Console.WriteLine("> REGISTERED: Left Mouse Button");
-            frmSettings.leftCounter++;
-            Settings.Default["leftCounter"] = frmSettings.leftCounter;
-            Settings.Default.Save();
-
-            if (Convert.ToBoolean(Settings.Default["rightToTXTtoggle"]))
-            {
-                StreamWriter Writer = new StreamWriter(Settings.Default["leftToTXT"].ToString() + @"\leftCounter.txt");
-                Writer.WriteLine(frmSettings.leftCounter);
-                Writer.Close();
-            }
-        }
-
-        private void EventMouseRIGHT(object sender, EventArgs e)
-        {
-            Console.WriteLine("> REGISTERED: Right Mouse Button");
-            frmSettings.rightCounter++;
-            Settings.Default["rightCounter"] = frmSettings.rightCounter;
-            Settings.Default.Save();
-
-            if (Convert.ToBoolean(Settings.Default["rightToTXTtoggle"]))
-            {
-                StreamWriter Writer = new StreamWriter(Settings.Default["rightToTXT"].ToString() + @"\rightCounter.txt");
-                Writer.WriteLine(frmSettings.rightCounter);
-                Writer.Close();
-            }
-        }
-
-        private void xmlInjector(string inputPath, string outputPath, int FPS)
-        {
-            XmlDocument doc = new XmlDocument();
-
-            try
-            {
-                doc.Load(inputPath);
-                XmlNode Node = doc.DocumentElement;
-                XmlNode root = doc.SelectSingleNode("/xmeml/sequence");
-
-                foreach (var item in lbGlobalSS.Items)
-                {
-                    //Console.WriteLine(item);
-
-                    int itemC = Convert.ToInt16(item) * FPS;
-
-                    XmlElement marker = doc.CreateElement("marker");
-                    root.AppendChild(marker);
-                    XmlElement comment = doc.CreateElement("comment");
-                    comment.InnerText = itemC.ToString();
-                    marker.AppendChild(comment);
-                    XmlElement name = doc.CreateElement("name");
-                    name.InnerText = itemC.ToString();
-                    marker.AppendChild(name);
-                    XmlElement inn = doc.CreateElement("in");
-                    inn.InnerText = itemC.ToString();
-                    marker.AppendChild(inn);
-                    XmlElement outt = doc.CreateElement("out");
-                    outt.InnerText = "-1";
-                    marker.AppendChild(outt);
-                }
-            }
-            catch (Exception f)
-            {
-                Console.Write(f.Message);
-                throw;
-            }
-
-            doc.Save(outputPath + @"\project.xml");
-        }
-
         #region EMPTY METHODS
 
         private void label3_Click(object sender, EventArgs e)
         {
-        }
-
-        private void lbGlobalSS_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form PrPro = new frmPrPro();
-            PrPro.ShowDialog();
         }
 
         private void pbDisks_Click(object sender, EventArgs e)
