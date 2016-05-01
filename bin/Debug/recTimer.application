@@ -14,14 +14,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="recTimer.exe.manifest" size="4031">
+    <dependentAssembly dependencyType="install" codebase="recTimer.exe.manifest" size="4425">
       <assemblyIdentity name="recTimer.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GERoGNj5dVoDckLuOsPsEvVURNcw0AEcHKz3KgjToWc=</dsig:DigestValue>
+        <dsig:DigestValue>ViwgOb7HjnGP1JcpeFFQmQnLcIQH656Dy0Avqsy25bw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

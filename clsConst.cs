@@ -8,7 +8,7 @@ namespace recTimer
 {
     static class clsConst
     {
-        public static string buildVersion = "0.6.1.0501";
+        public static string buildVersion = "0.6.2.0517";
 
         public static String settingsPath = AppDomain.CurrentDomain.BaseDirectory + @"\settings.xml";
         public static String recHDD;

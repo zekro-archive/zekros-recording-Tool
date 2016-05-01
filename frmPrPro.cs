@@ -83,5 +83,13 @@ namespace recTimer
             Settings.Default["FPS"] = FPS;
             Settings.Default.Save();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var result = MessageBox.Show("Möchten sie die Hilfe für diese Funktion jetzt im Browser öffnen?", "Hilfe", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                System.Diagnostics.Process.Start("https://onedrive.live.com/redir?resid=7EFCEC9C69BC7699!1291&authkey=!ACACKV1qIUSTlFo&ithint=file%2cpdf");
+        }
     }
 }

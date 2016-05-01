@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrPro));
             this.btProjPath = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbProjPath = new System.Windows.Forms.TextBox();
@@ -37,6 +38,7 @@
             this.btImport = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cbFPS = new System.Windows.Forms.ComboBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btProjPath
@@ -126,11 +128,23 @@
             this.cbFPS.TabIndex = 8;
             this.cbFPS.SelectedIndexChanged += new System.EventHandler(this.cbFPS_SelectedIndexChanged);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(485, 151);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(37, 13);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "HILFE";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // frmPrPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 251);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.cbFPS);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btImport);
@@ -141,6 +155,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btProjPath);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPrPro";
@@ -162,5 +177,6 @@
         private System.Windows.Forms.Button btImport;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbFPS;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

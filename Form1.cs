@@ -64,7 +64,7 @@ namespace recTimer
             DEVELOPERMODE();
             ShowToolTip();
 
-            //Settings.Default["BUILDCOUNTER"] = 461;
+            //Settings.Default["BUILDCOUNTER"] = 512;
 
             frmSettings.timerToTextPATH = Settings.Default["timerToTXT"].ToString();
 

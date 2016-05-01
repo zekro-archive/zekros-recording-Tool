@@ -387,6 +387,7 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Teal;
             this.linkLabel2.Location = new System.Drawing.Point(278, 482);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(25, 13);

@@ -64,7 +64,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo zekrectool.ico</ApplicationIcon>
+    <ApplicationIcon>icon_rectool.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -160,6 +160,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon_rectool.ico" />
     <Content Include="logo zekrectool.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
