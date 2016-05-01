@@ -43,6 +43,7 @@
             this.lbRecInfo = new System.Windows.Forms.Label();
             this.lbTimerHH = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbRecTimeLeft = new System.Windows.Forms.Label();
             this.lbSpace = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,6 +51,7 @@
             this.pbDisks = new System.Windows.Forms.ProgressBar();
             this.lbDatenträger1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbRAMload = new System.Windows.Forms.ProgressBar();
             this.lbRam = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,7 +82,9 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -216,6 +220,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.lbRecTimeLeft);
             this.panel3.Controls.Add(this.lbSpace);
             this.panel3.Controls.Add(this.label2);
@@ -226,6 +231,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(307, 67);
             this.panel3.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(7, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // lbRecTimeLeft
             // 
@@ -239,7 +254,7 @@
             // lbSpace
             // 
             this.lbSpace.AutoSize = true;
-            this.lbSpace.Location = new System.Drawing.Point(45, 50);
+            this.lbSpace.Location = new System.Drawing.Point(91, 50);
             this.lbSpace.Name = "lbSpace";
             this.lbSpace.Size = new System.Drawing.Size(13, 13);
             this.lbSpace.TabIndex = 8;
@@ -248,7 +263,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 50);
+            this.label2.Location = new System.Drawing.Point(55, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 7;
@@ -265,16 +280,16 @@
             // 
             // pbDisks
             // 
-            this.pbDisks.Location = new System.Drawing.Point(9, 24);
+            this.pbDisks.Location = new System.Drawing.Point(58, 24);
             this.pbDisks.Name = "pbDisks";
-            this.pbDisks.Size = new System.Drawing.Size(291, 23);
+            this.pbDisks.Size = new System.Drawing.Size(242, 23);
             this.pbDisks.TabIndex = 5;
             this.pbDisks.Click += new System.EventHandler(this.pbDisks_Click);
             // 
             // lbDatenträger1
             // 
             this.lbDatenträger1.AutoSize = true;
-            this.lbDatenträger1.Location = new System.Drawing.Point(9, 8);
+            this.lbDatenträger1.Location = new System.Drawing.Point(55, 8);
             this.lbDatenträger1.Name = "lbDatenträger1";
             this.lbDatenträger1.Size = new System.Drawing.Size(138, 13);
             this.lbDatenträger1.TabIndex = 4;
@@ -282,6 +297,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.pictureBox2);
             this.panel5.Controls.Add(this.pbRAMload);
             this.panel5.Controls.Add(this.lbRam);
             this.panel5.Controls.Add(this.label8);
@@ -293,19 +309,30 @@
             this.panel5.Size = new System.Drawing.Size(307, 78);
             this.panel5.TabIndex = 9;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(7, 16);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
             // pbRAMload
             // 
-            this.pbRAMload.Location = new System.Drawing.Point(58, 43);
+            this.pbRAMload.Location = new System.Drawing.Point(107, 43);
             this.pbRAMload.Name = "pbRAMload";
-            this.pbRAMload.Size = new System.Drawing.Size(181, 20);
+            this.pbRAMload.Size = new System.Drawing.Size(151, 20);
             this.pbRAMload.TabIndex = 11;
             // 
             // lbRam
             // 
             this.lbRam.AutoSize = true;
-            this.lbRam.Location = new System.Drawing.Point(245, 48);
+            this.lbRam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lbRam.Location = new System.Drawing.Point(264, 41);
             this.lbRam.Name = "lbRam";
-            this.lbRam.Size = new System.Drawing.Size(24, 13);
+            this.lbRam.Size = new System.Drawing.Size(36, 20);
             this.lbRam.TabIndex = 10;
             this.lbRam.Text = "0 %";
             // 
@@ -313,7 +340,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 43);
+            this.label8.Location = new System.Drawing.Point(55, 43);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 20);
             this.label8.TabIndex = 9;
@@ -321,17 +348,18 @@
             // 
             // pbCPUload
             // 
-            this.pbCPUload.Location = new System.Drawing.Point(58, 13);
+            this.pbCPUload.Location = new System.Drawing.Point(107, 13);
             this.pbCPUload.Name = "pbCPUload";
-            this.pbCPUload.Size = new System.Drawing.Size(181, 20);
+            this.pbCPUload.Size = new System.Drawing.Size(151, 20);
             this.pbCPUload.TabIndex = 8;
             // 
             // lbCpu
             // 
             this.lbCpu.AutoSize = true;
-            this.lbCpu.Location = new System.Drawing.Point(245, 18);
+            this.lbCpu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lbCpu.Location = new System.Drawing.Point(264, 11);
             this.lbCpu.Name = "lbCpu";
-            this.lbCpu.Size = new System.Drawing.Size(24, 13);
+            this.lbCpu.Size = new System.Drawing.Size(36, 20);
             this.lbCpu.TabIndex = 7;
             this.lbCpu.Text = "0 %";
             // 
@@ -339,7 +367,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 13);
+            this.label3.Location = new System.Drawing.Point(55, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 20);
             this.label3.TabIndex = 4;
@@ -535,8 +563,10 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -595,6 +625,8 @@
         private System.Windows.Forms.Button btPrPro;
         private System.Windows.Forms.ListBox lbGlobalSS;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

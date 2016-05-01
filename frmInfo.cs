@@ -15,7 +15,7 @@ namespace recTimer
         public frmInfo()
         {
             InitializeComponent();
-            lbVersionInfo.Text = "Version: preAlpha v." + clsConst.buildVersion + "a";
+            lbVersionInfo.Text = "Version: Beta v." + clsConst.buildVersion;
         }
 
         private void frmInfo_Load(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace recTimer
 
         private void btChangeLogs_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://onedrive.live.com/redir?resid=7EFCEC9C69BC7699!1167&authkey=!ACwunu8El4_Y-lE&ithint=file%2cdocx");
+            System.Diagnostics.Process.Start("https://github.com/zekroTJA/zekros-recording-Tool/releases");
         }
     }
 }

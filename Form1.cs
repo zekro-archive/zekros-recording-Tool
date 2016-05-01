@@ -14,6 +14,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Linq;
+using System.Net;
 
 namespace recTimer
 {
@@ -25,6 +26,8 @@ namespace recTimer
         public static int globalSS = 0;
         public static int numbMarks = 1;
         bool keyWasPressed = false;
+
+        public static string dlBytes, dlTotalBytes, dlProgress;
 
         [DllImport("user32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vk);
@@ -68,16 +71,14 @@ namespace recTimer
             timerKeyboardHook.Start();
             timerCPU.Start();
             timerAutoSave.Start();
-            lbVersion.Text = "preAlpha v." + clsConst.buildVersion + "a";
+            lbVersion.Text = "Beta v." + clsConst.buildVersion;
 
-            //Wenn Updatenotification aktiviert ist wird der Update testausgeführt, sonst Warnung.
-            if (Convert.ToBoolean(Settings.Default["updates"]))
-            {
+            //Wenn Updatenotification aktiviert ist wird der Updatetestausgeführt, sonst Warnung.
+            if ((bool)Settings.Default["updates"])
                 clsUpdate.testForUpdate();
-            } else
-            {
-                lbUpdateWarn.Text = "WARNUNG!";
-            }
+            else
+                if (clsUpdate.getUpdateStatus())
+                    lbUpdateWarn.Text = "UPDATE";
 
             buildCounter();
 
@@ -91,7 +92,7 @@ namespace recTimer
         protected override void WndProc(ref Message m)
         {
 
-            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            if ((bool)Settings.Default["alternateHook"])
             {
 
                 if (m.Msg == WM_HOTKEY && (int)m.WParam == 1)
@@ -156,7 +157,7 @@ namespace recTimer
                 lbTimerSS.Text = tSS.ToString();
             }
 
-            if (Convert.ToBoolean(Settings.Default["timerToTXTtoggle"]))
+            if ((bool)Settings.Default["timerToTXTtoggle"])
                 timerToTXT();
 
             globalSS++;
@@ -246,7 +247,7 @@ namespace recTimer
                 }
             }
 
-            if (Convert.ToBoolean(Settings.Default["alwaysOnTop"]))
+            if ((bool)Settings.Default["alwaysOnTop"])
             {
                 if (TopMost == false)
                 {
@@ -269,7 +270,7 @@ namespace recTimer
         /// <param name="e"></param>
         private void timerKeyboardHook_Tick(object sender, EventArgs e)
         {
-            if (Convert.ToBoolean(Settings.Default["alternateHook"]))
+            if ((bool)Settings.Default["alternateHook"])
             {
                 recAltKeyHook();
                 markAltKeyHook();
@@ -288,7 +289,7 @@ namespace recTimer
 
         private void timerAutoSave_Tick(object sender, EventArgs e)
         {
-            if (Convert.ToBoolean(Settings.Default["autoSave"]))
+            if ((bool)Settings.Default["autoSave"])
             {
                 StreamWriter Writer = new StreamWriter(@"[AUTOSAVE] saved_marks.txt");
 
@@ -1383,8 +1384,12 @@ namespace recTimer
 
         private void lbUpdateWarn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            clsUpdate.testForUpdate();
+
+            /*
             MessageBox.Show("ACHTUNG! Die Benachichtigung für Updates ist deaktiviert! Wenn sie dies ändern wollen gehen sie in die Einstellungen und aktivieren sie die Update-Benachichtigung!");
             lbUpdateWarn.Text = "";
+            */
         }
 
         private void timerColorBlack()
@@ -1396,7 +1401,7 @@ namespace recTimer
 
         private void DEVELOPERMODE()
         {
-            if (Convert.ToBoolean(Settings.Default["DEVELOPER"]))
+            if ((bool)Settings.Default["DEVELOPER"])
             {
                 AllocConsole();
                 Console.WriteLine("DEVELOPERMODE ACTIVATED");
@@ -1454,20 +1459,14 @@ namespace recTimer
             }            
         }
 
-        /// <summary> TO DO
-        /// Speicherung der Zahl der Mausklicks in eine textdatei nach jedem Mausklick.
-        /// Textdatei pfad aus den Einstellungen wenn der Haken aktiviert ist.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EventMouseLEFT(object sender, EventArgs e)
         {
-            Console.WriteLine("> REGISTERED: Left Mouse Button");
+            //Console.WriteLine("> REGISTERED: Left Mouse Button");
             frmSettings.leftCounter++;
             Settings.Default["leftCounter"] = frmSettings.leftCounter;
             Settings.Default.Save();
 
-            if (Convert.ToBoolean(Settings.Default["rightToTXTtoggle"]))
+            if ((bool)Settings.Default["rightToTXTtoggle"])
             {
                 StreamWriter Writer = new StreamWriter(Settings.Default["leftToTXT"].ToString() + @"\leftCounter.txt");
                 Writer.WriteLine(frmSettings.leftCounter);
@@ -1477,12 +1476,12 @@ namespace recTimer
 
         private void EventMouseRIGHT(object sender, EventArgs e)
         {
-            Console.WriteLine("> REGISTERED: Right Mouse Button");
+            //Console.WriteLine("> REGISTERED: Right Mouse Button");
             frmSettings.rightCounter++;
             Settings.Default["rightCounter"] = frmSettings.rightCounter;
             Settings.Default.Save();
 
-            if (Convert.ToBoolean(Settings.Default["rightToTXTtoggle"]))
+            if ((bool)Settings.Default["rightToTXTtoggle"])
             {
                 StreamWriter Writer = new StreamWriter(Settings.Default["rightToTXT"].ToString() + @"\rightCounter.txt");
                 Writer.WriteLine(frmSettings.rightCounter);

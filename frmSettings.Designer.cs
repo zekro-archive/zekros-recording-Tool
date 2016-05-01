@@ -196,9 +196,9 @@
             this.cbAlternateHook.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAlternateHook.Location = new System.Drawing.Point(20, 113);
             this.cbAlternateHook.Name = "cbAlternateHook";
-            this.cbAlternateHook.Size = new System.Drawing.Size(175, 17);
+            this.cbAlternateHook.Size = new System.Drawing.Size(172, 17);
             this.cbAlternateHook.TabIndex = 0;
-            this.cbAlternateHook.Text = "Alternative Key Hook aktivieren";
+            this.cbAlternateHook.Text = "Alternative KeyHook aktivieren";
             this.cbAlternateHook.UseVisualStyleBackColor = true;
             this.cbAlternateHook.CheckedChanged += new System.EventHandler(this.cbAlternateHook_CheckedChanged);
             // 
@@ -219,9 +219,9 @@
             this.cbUpdates.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbUpdates.Location = new System.Drawing.Point(20, 28);
             this.cbUpdates.Name = "cbUpdates";
-            this.cbUpdates.Size = new System.Drawing.Size(255, 17);
+            this.cbUpdates.Size = new System.Drawing.Size(258, 17);
             this.cbUpdates.TabIndex = 0;
-            this.cbUpdates.Text = "Möchten sie bei Updates benachichtigt werden?";
+            this.cbUpdates.Text = "Möchten sie bei Updates benachrichtigt werden?";
             this.cbUpdates.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -587,10 +587,10 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(6, 23);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(493, 26);
+            this.label10.Size = new System.Drawing.Size(496, 26);
             this.label10.TabIndex = 2;
-            this.label10.Text = "Stelle ein, nach welcher Zeit sich der Timer Rot färben soll, um zu markieren wan" +
-    "n eine Folge vorbei ist.\r\nDie Uhr stellt sich wieder auf die Standart-Farbe zurü" +
+            this.label10.Text = "Stelle ein, nach welcher Zeit sich der Timer Rot färben soll, um zu markieren, wa" +
+    "nn eine Folge vorbei ist.\r\nDie Uhr stellt sich wieder auf die Standardfarbe zurü" +
     "ck, sobald ein Marker gesetzt wurde.\r\n";
             // 
             // label11
@@ -857,7 +857,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(8, 7);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(540, 39);
+            this.label12.Size = new System.Drawing.Size(543, 39);
             this.label12.TabIndex = 0;
             this.label12.Text = resources.GetString("label12.Text");
             // 

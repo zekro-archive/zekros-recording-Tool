@@ -323,7 +323,8 @@ namespace recTimer
 
         private void cbDEVELOPER_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbDEVELOPER.Checked)
+            Form form = Application.OpenForms["frmSettings"];
+            if (cbDEVELOPER.Checked && form != null)
                 MessageBox.Show("Dieser Modus ist eigentlich nur für den Entwickler! Durch die Aktivierung startet beim Start die Console mit in der 'sinnlose' Dinge stehen die eh keinen jucken. Kannste also wieder aus machen wenn es dich nervt. :^)");
         }
     }
