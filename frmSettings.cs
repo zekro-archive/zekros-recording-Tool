@@ -15,6 +15,8 @@ using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
 
+using static recTimer.clsConst;
+
 namespace recTimer
 {
     public partial class frmSettings : Form
@@ -202,7 +204,7 @@ namespace recTimer
 
         private void tbRecHDD_TextChanged(object sender, EventArgs e)
         {
-            tbRecHDD.Text = clsConst.recHDD;
+            tbRecHDD.Text = recHDD;
         }
 
         private void button1_Click(object sender, EventArgs e)

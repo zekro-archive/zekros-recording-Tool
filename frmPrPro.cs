@@ -30,6 +30,7 @@ namespace recTimer
 
         private void frmPrPro_Load(object sender, EventArgs e)
         {
+
             if (Settings.Default["inputPath"].ToString() != "")
                 tbProjPath.Text = Settings.Default["inputPath"].ToString();
 
@@ -38,6 +39,7 @@ namespace recTimer
 
             if (Settings.Default["FPS"].ToString() != "")
                 cbFPS.Text = Settings.Default["FPS"].ToString();
+                
         }
 
         private void btProjPath_Click(object sender, EventArgs e)

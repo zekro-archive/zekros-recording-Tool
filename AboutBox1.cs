@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace recTimer
 {
-    static class clsConst
+    partial class AboutBox1 : Form
     {
-        public static string buildVersion = AssemblyVersion;
-
-        public static String settingsPath = AppDomain.CurrentDomain.BaseDirectory + @"\settings.xml", recHDD;
-
-        //CUSTOM EXCEPTION BOX
-        public static string CEXB_MESSAGE, CEXB_EXCEPTION, CEXB_TITLE;
-
-
-
-
+        public AboutBox1()
+        {
+            InitializeComponent();
+            this.Text = String.Format("Info über {0}", AssemblyTitle);
+            this.labelProductName.Text = AssemblyProduct;
+            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            this.labelCopyright.Text = AssemblyCopyright;
+            this.labelCompanyName.Text = AssemblyCompany;
+            this.textBoxDescription.Text = AssemblyDescription;
+        }
 
         #region Assemblyattributaccessoren
 
-        public static string AssemblyTitle
+        public string AssemblyTitle
         {
             get
             {
@@ -39,7 +41,7 @@ namespace recTimer
             }
         }
 
-        public static string AssemblyVersion
+        public string AssemblyVersion
         {
             get
             {
@@ -47,7 +49,7 @@ namespace recTimer
             }
         }
 
-        public static string AssemblyDescription
+        public string AssemblyDescription
         {
             get
             {
@@ -60,7 +62,7 @@ namespace recTimer
             }
         }
 
-        public static string AssemblyProduct
+        public string AssemblyProduct
         {
             get
             {
@@ -73,7 +75,7 @@ namespace recTimer
             }
         }
 
-        public static string AssemblyCopyright
+        public string AssemblyCopyright
         {
             get
             {
@@ -86,7 +88,7 @@ namespace recTimer
             }
         }
 
-        public static string AssemblyCompany
+        public string AssemblyCompany
         {
             get
             {
@@ -99,5 +101,10 @@ namespace recTimer
             }
         }
         #endregion
+
+        private void AboutBox1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

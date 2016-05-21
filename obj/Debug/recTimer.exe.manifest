@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon_rectool.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="recTimer" version="0.6.2.517" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="recTimer" version="0.6.3.588" language="neutral" processorArchitecture="msil" />
     <commandLine file="recTimer.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="2076136">
-      <assemblyIdentity name="recTimer" version="0.6.2.517" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="2280424">
+      <assemblyIdentity name="recTimer" version="0.6.3.588" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RxoD/JqfCAdPAap/si9MxugSMyUgPZdSiRmGhZlURtw=</dsig:DigestValue>
+        <dsig:DigestValue>Wke/VaT2Vor+zmcS+6aOQaAlYuIeKQ8lGfr4AunmEFo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

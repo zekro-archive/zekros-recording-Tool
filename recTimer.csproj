@@ -81,9 +81,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox1.Designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
     <Compile Include="clsConst.cs" />
     <Compile Include="clsMouseHook.cs" />
     <Compile Include="clsUpdate.cs" />
+    <Compile Include="frmCustomExcBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCustomExcBox.Designer.cs">
+      <DependentUpon>frmCustomExcBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,8 +123,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCustomExcBox.resx">
+      <DependentUpon>frmCustomExcBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInfo.resx">
       <DependentUpon>frmInfo.cs</DependentUpon>

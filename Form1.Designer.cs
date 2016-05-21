@@ -60,9 +60,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.timerHH = new System.Windows.Forms.Timer(this.components);
-            this.timerMM = new System.Windows.Forms.Timer(this.components);
-            this.timerSS = new System.Windows.Forms.Timer(this.components);
             this.timerCPU = new System.Windows.Forms.Timer(this.components);
             this.pcCPU = new System.Diagnostics.PerformanceCounter();
             this.pcRAM = new System.Diagnostics.PerformanceCounter();
@@ -79,6 +76,7 @@
             this.lbUpdateWarn = new System.Windows.Forms.LinkLabel();
             this.pcHDD = new System.Diagnostics.PerformanceCounter();
             this.timerAutoSave = new System.Windows.Forms.Timer(this.components);
+            this.timerSS = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -245,11 +243,11 @@
             // lbRecTimeLeft
             // 
             this.lbRecTimeLeft.AutoSize = true;
-            this.lbRecTimeLeft.Enabled = false;
             this.lbRecTimeLeft.Location = new System.Drawing.Point(181, 50);
             this.lbRecTimeLeft.Name = "lbRecTimeLeft";
-            this.lbRecTimeLeft.Size = new System.Drawing.Size(0, 13);
+            this.lbRecTimeLeft.Size = new System.Drawing.Size(24, 13);
             this.lbRecTimeLeft.TabIndex = 15;
+            this.lbRecTimeLeft.Text = "test";
             // 
             // lbSpace
             // 
@@ -396,21 +394,6 @@
             this.linkLabel2.Text = "Info";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // timerHH
-            // 
-            this.timerHH.Interval = 3600000;
-            this.timerHH.Tick += new System.EventHandler(this.timerHH_Tick);
-            // 
-            // timerMM
-            // 
-            this.timerMM.Interval = 60000;
-            this.timerMM.Tick += new System.EventHandler(this.timerMM_Tick);
-            // 
-            // timerSS
-            // 
-            this.timerSS.Interval = 1000;
-            this.timerSS.Tick += new System.EventHandler(this.timerSS_Tick);
-            // 
             // timerCPU
             // 
             this.timerCPU.Interval = 1000;
@@ -539,6 +522,11 @@
             this.timerAutoSave.Interval = 30000;
             this.timerAutoSave.Tick += new System.EventHandler(this.timerAutoSave_Tick);
             // 
+            // timerSS
+            // 
+            this.timerSS.Interval = 1000;
+            this.timerSS.Tick += new System.EventHandler(this.timerSS_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -598,9 +586,6 @@
         private System.Windows.Forms.Label lbTimerSS;
         private System.Windows.Forms.Label lbTimerMM;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Timer timerHH;
-        private System.Windows.Forms.Timer timerMM;
-        private System.Windows.Forms.Timer timerSS;
         private System.Windows.Forms.Button btReset;
         private System.Windows.Forms.Label lbCpu;
         private System.Windows.Forms.Timer timerCPU;
@@ -628,6 +613,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Timer timerSS;
     }
 }
 

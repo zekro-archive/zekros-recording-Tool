@@ -16,6 +16,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Net;
 
+using static recTimer.clsConst;
+
 namespace recTimer
 {
     public partial class Form1 : Form
@@ -47,6 +49,8 @@ namespace recTimer
         const int MOD_CONTROL = 0x0002;
         const int MOD_SHIFT = 0x0004;
         const int WM_HOTKEY = 0x0312;
+
+        int markerAfterTime;
         #endregion
 
         public Form1()
@@ -64,14 +68,14 @@ namespace recTimer
             DEVELOPERMODE();
             ShowToolTip();
 
-            //Settings.Default["BUILDCOUNTER"] = 512;
+            //Settings.Default["BUILDCOUNTER"] = 565;
 
             frmSettings.timerToTextPATH = Settings.Default["timerToTXT"].ToString();
 
             timerKeyboardHook.Start();
             timerCPU.Start();
             timerAutoSave.Start();
-            lbVersion.Text = "Beta v." + clsConst.buildVersion;
+            lbVersion.Text = "Beta v." + buildVersion;
 
             //Wenn Updatenotification aktiviert ist wird der Updatetestausgeführt, sonst Warnung.
             if ((bool)Settings.Default["updates"])
@@ -143,25 +147,49 @@ namespace recTimer
         //Timer für Timer Sekunden
         private void timerSS_Tick(object sender, EventArgs e)
         {
-            tSS = tSS + 1;
+            tSS++;
             if (tSS == 60)
             {
                 tSS = 0;
+                tMM++;
             }
 
             if (tSS < 10)
-            {
                 lbTimerSS.Text = "0" + tSS.ToString();
-            } else
-            {
+            else
                 lbTimerSS.Text = tSS.ToString();
-            }
+
+            if (tMM < 10)
+                lbTimerMM.Text = "0" + tMM.ToString();
+            else
+                lbTimerMM.Text = tMM.ToString();
+
+            if (tHH < 10)
+                lbTimerHH.Text = "0" + tHH.ToString();
+            else
+                lbTimerHH.Text = tHH.ToString();
 
             if ((bool)Settings.Default["timerToTXTtoggle"])
                 timerToTXT();
 
+            markerAfterTime = Convert.ToInt32(Settings.Default["timerMarker"]);
+            if (tMM == markerAfterTime
+                || tMM / 2 == markerAfterTime
+                || tMM / 3 == markerAfterTime
+                || tMM / 4 == markerAfterTime
+                || tMM / 5 == markerAfterTime
+                || tMM / 6 == markerAfterTime)
+            {
+                lbTimerHH.ForeColor = Color.Red;
+                lbTimerMM.ForeColor = Color.Red;
+                lbTimerSS.ForeColor = Color.Red;
+            }
+
+            hddWritingValue();
+
             globalSS++;
         }
+        /*
         //Timer für Timer Minuten
         private void timerMM_Tick(object sender, EventArgs e)
         {
@@ -208,6 +236,7 @@ namespace recTimer
             }
 
         }
+        */
 
         /// <summary>
         /// Timer für Aktualisierug und Anzeige der PC-Stats.
@@ -1222,14 +1251,11 @@ namespace recTimer
                 lbRecInfo.Text = "Aufnahme gestoppt.";
                 lbRecInfo.ForeColor = Color.Red;
 
-                timerHH.Stop();
-                timerMM.Stop();
                 timerSS.Stop();
             }
             else
             {
-                timerHH.Start();
-                timerMM.Start();
+
                 timerSS.Start();
 
                 lbRecInfo.Text = "Aufnahme läuft.";
@@ -1252,14 +1278,11 @@ namespace recTimer
                 lbRecInfo.Text = "Aufnahme gestoppt.";
                 lbRecInfo.ForeColor = Color.Red;
 
-                timerHH.Stop();
-                timerMM.Stop();
                 timerSS.Stop();
             }
             else
             {
-                timerHH.Start();
-                timerMM.Start();
+
                 timerSS.Start();
 
                 lbRecInfo.Text = "Aufnahme läuft.";
@@ -1310,14 +1333,26 @@ namespace recTimer
 
         private void btPrPro_Click(object sender, EventArgs e)
         {
-            if (Settings.Default["inputPath"].ToString() == "" || Settings.Default["outputPath"].ToString() == "" || Settings.Default["FPS"].ToString() == "")
+            
+            try
             {
-                MessageBox.Show("Bitte tätigen sie erst die Einstellungen zu dieser Funktion [Durchsuchen...] um fortfahren zu können!");
+                if (Settings.Default["inputPath"].ToString() == "" || Settings.Default["outputPath"].ToString() == "" || Settings.Default["FPS"].ToString() == "")
+                {
+                    MessageBox.Show("Bitte tätigen sie erst die Einstellungen zu dieser Funktion [Durchsuchen...] um fortfahren zu können!");
+                }
+                else
+                {
+                    xmlInjector(Settings.Default["inputPath"].ToString(), Settings.Default["outputPath"].ToString(), Convert.ToInt16(Settings.Default["FPS"]));
+                }
+                
             }
-            else
+            catch (Exception ex)
             {
-                xmlInjector(Settings.Default["inputPath"].ToString(), Settings.Default["outputPath"].ToString(), Convert.ToInt16(Settings.Default["FPS"]));
+                customExcBox("Es ist ein kritischer Fehler beim lesen der XML-Datei bzw. beim extrahieren der Daten aufgetreten.\r\nBitte überprüfen sie ihre Einstellungen und versuchen sie es erneut!\r\n\r\nFalls ein Bug vorliegt, bitte folgende Exception in den Report einbetten!", "Kritischer Ferhler", ex);
+                //throw;
             }
+
+            
         }
 
         private void cmdRecFolder_Click(object sender, EventArgs e)
@@ -1528,6 +1563,41 @@ namespace recTimer
             }
 
             doc.Save(outputPath + @"\project.xml");
+        }
+
+        /// <summary>
+        /// Öffnet einen custom Exception Dialog "recTimer.frmCustomExcDialog.cs" mit o.g.Variablen.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <param name="exception"></param>
+        private void customExcBox(string message, string title, System.Exception exception)
+        {
+            CEXB_MESSAGE = message;
+            CEXB_EXCEPTION = exception.ToString();
+            CEXB_TITLE = title;
+
+            frmCustomExcBox msg = new frmCustomExcBox();
+            msg.ShowDialog();
+        }
+
+        long tfs_T1, tfs_T2, delta;
+        private void hddWritingValue()
+        {
+            DriveInfo[] Drives = DriveInfo.GetDrives();
+
+            string recHDD = Settings.Default["recHDD"].ToString();
+            
+            foreach (DriveInfo d in Drives)
+            {
+                if (d.Name == recHDD)
+                {
+                    tfs_T1 = d.TotalFreeSpace;
+
+                    delta = tfs_T1;
+                    lbRecTimeLeft.Text = tfs_T1.ToString();
+                }
+            }
         }
 
         #region EMPTY METHODS
