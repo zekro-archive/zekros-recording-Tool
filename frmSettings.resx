@@ -124,11 +124,8 @@
     <value>Aktiviere die alternative HotkeyHook, falls Probleme bei der Benutzung Deines Aufnahmeprogrammes auftreten. Ein bekanntes Problem ist, dass z.B. Fraps bei der Standard-HotkeyHook (globalKeyboardHook)nicht mehr seine eigenen Hotkeys erkennt.
 Um solche auftretenden Bugs zu beheben aktiviere diese alternative Hook.
 
-ACHTUNG: Bei der alternativen Hook musst Du beim Drücken des festgelegten Hotkeys die STRG-Taste gedrückt halten, um den Bug zu umgehen!
-
-SEIT NEUSTEM UPDATE: Ein Neustart des Programmes ist bei der Änderung der Einstellung nicht mehr nötig! ;D
-
-Zudem könnte es zu "paranormalen" Verhalten der Funktionen des Programmes führen (Timer/Marker aktivieren, ohne dass ein Key gedrückt wurde.) Daran wird noch gearbeitet! :^)</value>
+*Die Zusatzkeys STRG und SHIFT funktionieren nur mit der alternativen Keyhook!
+</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Sie können hier die aktuelle Zeit des Timers live in eine festgelegte Textdatei schreiben lassen, um diese in einem 

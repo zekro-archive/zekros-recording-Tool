@@ -4,7 +4,7 @@
   <description asmv2:iconFile="icon_rectool.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="recTimer" version="0.6.3.588" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="recTimer" version="0.6.4.605" language="neutral" processorArchitecture="msil" />
     <commandLine file="recTimer.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="2280424">
-      <assemblyIdentity name="recTimer" version="0.6.3.588" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="recTimer.exe" size="2273768">
+      <assemblyIdentity name="recTimer" version="0.6.4.605" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Wke/VaT2Vor+zmcS+6aOQaAlYuIeKQ8lGfr4AunmEFo=</dsig:DigestValue>
+        <dsig:DigestValue>igC8qT8F0L9lHSJrVUjc6YWYCcoCf8cxnZHoD1rp+BI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,13 +72,13 @@
       <dsig:DigestValue>5TTUWreaJYBLbuYKAvUmYclohAATxmpKYOzkXG3EWko=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="recTimer.exe.config" size="4012">
+  <file name="recTimer.exe.config" size="4629">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4paWmYM0p0pFGu10DrQc0tstO5naDlweC5iVw0k8mak=</dsig:DigestValue>
+      <dsig:DigestValue>4Gn/ieTSjntKKcjwvkkYeIx9gDcsZkNfIGK+hRCpwl4=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -245,9 +245,8 @@
             this.lbRecTimeLeft.AutoSize = true;
             this.lbRecTimeLeft.Location = new System.Drawing.Point(181, 50);
             this.lbRecTimeLeft.Name = "lbRecTimeLeft";
-            this.lbRecTimeLeft.Size = new System.Drawing.Size(24, 13);
+            this.lbRecTimeLeft.Size = new System.Drawing.Size(0, 13);
             this.lbRecTimeLeft.TabIndex = 15;
-            this.lbRecTimeLeft.Text = "test";
             // 
             // lbSpace
             // 

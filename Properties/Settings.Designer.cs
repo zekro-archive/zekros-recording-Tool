@@ -181,7 +181,6 @@ namespace recTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("460")]
         public int BUILDCOUNTER {
             get {
                 return ((int)(this["BUILDCOUNTER"]));
@@ -344,6 +343,78 @@ namespace recTimer.Properties {
             }
             set {
                 this["DEVELOPER"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public global::System.Windows.Forms.Keys KEY_REC {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["KEY_REC"]));
+            }
+            set {
+                this["KEY_REC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public global::System.Windows.Forms.Keys KEY_MARK {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["KEY_MARK"]));
+            }
+            set {
+                this["KEY_MARK"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool recKeySTRG {
+            get {
+                return ((bool)(this["recKeySTRG"]));
+            }
+            set {
+                this["recKeySTRG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool recKeySHIFT {
+            get {
+                return ((bool)(this["recKeySHIFT"]));
+            }
+            set {
+                this["recKeySHIFT"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool markKeySTRG {
+            get {
+                return ((bool)(this["markKeySTRG"]));
+            }
+            set {
+                this["markKeySTRG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool markKeySHIFT {
+            get {
+                return ((bool)(this["markKeySHIFT"]));
+            }
+            set {
+                this["markKeySHIFT"] = value;
             }
         }
     }

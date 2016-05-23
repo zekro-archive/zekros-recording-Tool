@@ -40,9 +40,13 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbMarkKey = new System.Windows.Forms.ComboBox();
+            this.cbMarkKeySHIFT = new System.Windows.Forms.CheckBox();
+            this.cbMarkKeySTRG = new System.Windows.Forms.CheckBox();
+            this.cbRecKeySHIFT = new System.Windows.Forms.CheckBox();
+            this.cbRecKeySTRG = new System.Windows.Forms.CheckBox();
+            this.btMarkKey = new System.Windows.Forms.Button();
+            this.btRecKey = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbRecKey = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbRecHDD = new System.Windows.Forms.TextBox();
@@ -226,9 +230,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cbMarkKey);
+            this.groupBox2.Controls.Add(this.cbMarkKeySHIFT);
+            this.groupBox2.Controls.Add(this.cbMarkKeySTRG);
+            this.groupBox2.Controls.Add(this.cbRecKeySHIFT);
+            this.groupBox2.Controls.Add(this.cbRecKeySTRG);
+            this.groupBox2.Controls.Add(this.btMarkKey);
+            this.groupBox2.Controls.Add(this.btRecKey);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.cbRecKey);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(14, 115);
             this.groupBox2.Name = "groupBox2";
@@ -237,67 +245,65 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hotkeys";
             // 
-            // cbMarkKey
+            // cbMarkKeySHIFT
             // 
-            this.cbMarkKey.FormattingEnabled = true;
-            this.cbMarkKey.Items.AddRange(new object[] {
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "NumPad0",
-            "NumPad1",
-            "NumPad2",
-            "NumPad3",
-            "NumPad4",
-            "NumPad5",
-            "NumPad6",
-            "NumPad7",
-            "NumPad8",
-            "NumPad9",
-            "Add",
-            "Devide",
-            "Substract",
-            "Multiply"});
-            this.cbMarkKey.Location = new System.Drawing.Point(108, 56);
-            this.cbMarkKey.Name = "cbMarkKey";
-            this.cbMarkKey.Size = new System.Drawing.Size(297, 21);
-            this.cbMarkKey.TabIndex = 10;
-            this.cbMarkKey.SelectedIndexChanged += new System.EventHandler(this.cbMarkKey_SelectedIndexChanged);
+            this.cbMarkKeySHIFT.AutoSize = true;
+            this.cbMarkKeySHIFT.Location = new System.Drawing.Point(372, 58);
+            this.cbMarkKeySHIFT.Name = "cbMarkKeySHIFT";
+            this.cbMarkKeySHIFT.Size = new System.Drawing.Size(63, 17);
+            this.cbMarkKeySHIFT.TabIndex = 16;
+            this.cbMarkKeySHIFT.Text = "+SHIFT";
+            this.cbMarkKeySHIFT.UseVisualStyleBackColor = true;
+            // 
+            // cbMarkKeySTRG
+            // 
+            this.cbMarkKeySTRG.AutoSize = true;
+            this.cbMarkKeySTRG.Location = new System.Drawing.Point(283, 58);
+            this.cbMarkKeySTRG.Name = "cbMarkKeySTRG";
+            this.cbMarkKeySTRG.Size = new System.Drawing.Size(62, 17);
+            this.cbMarkKeySTRG.TabIndex = 15;
+            this.cbMarkKeySTRG.Text = "+STRG";
+            this.cbMarkKeySTRG.UseVisualStyleBackColor = true;
+            // 
+            // cbRecKeySHIFT
+            // 
+            this.cbRecKeySHIFT.AutoSize = true;
+            this.cbRecKeySHIFT.Location = new System.Drawing.Point(372, 23);
+            this.cbRecKeySHIFT.Name = "cbRecKeySHIFT";
+            this.cbRecKeySHIFT.Size = new System.Drawing.Size(63, 17);
+            this.cbRecKeySHIFT.TabIndex = 14;
+            this.cbRecKeySHIFT.Text = "+SHIFT";
+            this.cbRecKeySHIFT.UseVisualStyleBackColor = true;
+            // 
+            // cbRecKeySTRG
+            // 
+            this.cbRecKeySTRG.AutoSize = true;
+            this.cbRecKeySTRG.Location = new System.Drawing.Point(283, 23);
+            this.cbRecKeySTRG.Name = "cbRecKeySTRG";
+            this.cbRecKeySTRG.Size = new System.Drawing.Size(62, 17);
+            this.cbRecKeySTRG.TabIndex = 13;
+            this.cbRecKeySTRG.Text = "+STRG";
+            this.cbRecKeySTRG.UseVisualStyleBackColor = true;
+            // 
+            // btMarkKey
+            // 
+            this.btMarkKey.Location = new System.Drawing.Point(108, 54);
+            this.btMarkKey.Name = "btMarkKey";
+            this.btMarkKey.Size = new System.Drawing.Size(159, 23);
+            this.btMarkKey.TabIndex = 12;
+            this.btMarkKey.Text = "button6";
+            this.btMarkKey.UseVisualStyleBackColor = true;
+            this.btMarkKey.Click += new System.EventHandler(this.btMarkKey_Click);
+            // 
+            // btRecKey
+            // 
+            this.btRecKey.Location = new System.Drawing.Point(108, 23);
+            this.btRecKey.Name = "btRecKey";
+            this.btRecKey.Size = new System.Drawing.Size(159, 23);
+            this.btRecKey.TabIndex = 11;
+            this.btRecKey.Text = "button6";
+            this.btRecKey.UseVisualStyleBackColor = true;
+            this.btRecKey.Click += new System.EventHandler(this.btRecKey_Click);
             // 
             // label3
             // 
@@ -307,68 +313,6 @@
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Marker setzen:";
-            // 
-            // cbRecKey
-            // 
-            this.cbRecKey.FormattingEnabled = true;
-            this.cbRecKey.Items.AddRange(new object[] {
-            "F1",
-            "F2",
-            "F3",
-            "F4",
-            "F5",
-            "F6",
-            "F7",
-            "F8",
-            "F9",
-            "F10",
-            "F11",
-            "F12",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "J",
-            "K",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "W",
-            "X",
-            "Y",
-            "Z",
-            "NumPad0",
-            "NumPad1",
-            "NumPad2",
-            "NumPad3",
-            "NumPad4",
-            "NumPad5",
-            "NumPad6",
-            "NumPad7",
-            "NumPad8",
-            "NumPad9",
-            "Add",
-            "Devide",
-            "Substract",
-            "Multiply"});
-            this.cbRecKey.Location = new System.Drawing.Point(108, 25);
-            this.cbRecKey.Name = "cbRecKey";
-            this.cbRecKey.Size = new System.Drawing.Size(297, 21);
-            this.cbRecKey.TabIndex = 8;
-            this.cbRecKey.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -916,7 +860,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmSettings";
@@ -971,10 +915,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbRecFolder;
         private System.Windows.Forms.TextBox tbRecHDD;
-        private System.Windows.Forms.ComboBox cbRecKey;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
-        private System.Windows.Forms.ComboBox cbMarkKey;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbProgramm5;
@@ -1026,5 +968,11 @@
         private System.Windows.Forms.CheckBox cbLeftToTXT;
         private System.Windows.Forms.Timer timerRefresher;
         private System.Windows.Forms.CheckBox cbDEVELOPER;
+        private System.Windows.Forms.Button btMarkKey;
+        private System.Windows.Forms.Button btRecKey;
+        private System.Windows.Forms.CheckBox cbRecKeySTRG;
+        private System.Windows.Forms.CheckBox cbMarkKeySHIFT;
+        private System.Windows.Forms.CheckBox cbMarkKeySTRG;
+        private System.Windows.Forms.CheckBox cbRecKeySHIFT;
     }
 }

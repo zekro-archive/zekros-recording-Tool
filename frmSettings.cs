@@ -31,6 +31,8 @@ namespace recTimer
         public static int timerMarkAfter;
         public static string timerToTextPATH;
 
+        public static Keys KEY_REC, KEY_MARK;
+
         public static long rightCounter;
         public static long leftCounter;
 
@@ -43,12 +45,6 @@ namespace recTimer
 
             if (Settings.Default["recHDD"].ToString() != "")
                 tbRecHDD.Text = Settings.Default["recHDD"].ToString();
-
-            if (Settings.Default["recKey"].ToString() != "")
-                cbRecKey.Text = Settings.Default["recKey"].ToString();
-
-            if (Settings.Default["markKey"].ToString() != "")
-                cbMarkKey.Text = Settings.Default["markKey"].ToString();
 
             if (Settings.Default["programm1"].ToString() != "")
                 tbProgramm1.Text = Settings.Default["programm1"].ToString();
@@ -117,6 +113,21 @@ namespace recTimer
             else
                 cbDEVELOPER.Checked = false;
 
+            if (Settings.Default.KEY_REC.ToString() != "None")
+                btRecKey.Text = Settings.Default.KEY_REC.ToString();
+            else
+                btRecKey.Text = "Undefiniert.";
+
+            if (Settings.Default.KEY_MARK.ToString() != "None")
+                btMarkKey.Text = Settings.Default.KEY_MARK.ToString();
+            else
+                btMarkKey.Text = "Undefiniert.";
+
+            cbRecKeySTRG.Checked = Settings.Default.recKeySTRG;
+            cbRecKeySHIFT.Checked = Settings.Default.recKeySHIFT;
+            cbMarkKeySTRG.Checked = Settings.Default.markKeySTRG;
+            cbMarkKeySHIFT.Checked = Settings.Default.markKeySHIFT;
+
             tbTimer.Value = Convert.ToInt16(Settings.Default["timerMarker"]);
             lbTimerMarker.Text = Convert.ToInt16(Settings.Default["timerMarker"]).ToString() + " Minuten" ;
             timerMarkAfter = Convert.ToInt32(Settings.Default["timerMarker"]);
@@ -132,9 +143,7 @@ namespace recTimer
         private void saveAll()
         {
             recHDD = tbRecHDD.Text;
-            Settings.Default["markKey"] = cbMarkKey.Text;
             Settings.Default["recHDD"] = tbRecHDD.Text;
-            Settings.Default["recKey"] = cbRecKey.Text;
             Settings.Default["recFolder"] = tbRecFolder.Text;
 
             Settings.Default["programm1"] = tbProgramm1.Text;
@@ -162,6 +171,14 @@ namespace recTimer
             timerMarkAfter = Convert.ToInt32(Settings.Default["timerMarker"]);
 
             Settings.Default["DEVELOPER"] = cbDEVELOPER.Checked;
+
+            Settings.Default.KEY_REC = KEY_REC;
+            Settings.Default.KEY_MARK = KEY_MARK;
+
+            Settings.Default.recKeySTRG = cbRecKeySTRG.Checked;
+            Settings.Default.recKeySHIFT = cbRecKeySHIFT.Checked;
+            Settings.Default.markKeySTRG = cbMarkKeySTRG.Checked;
+            Settings.Default.markKeySHIFT = cbMarkKeySHIFT.Checked;
 
             Settings.Default.Save();
         }
@@ -328,6 +345,32 @@ namespace recTimer
             Form form = Application.OpenForms["frmSettings"];
             if (cbDEVELOPER.Checked && form != null)
                 MessageBox.Show("Dieser Modus ist eigentlich nur für den Entwickler! Durch die Aktivierung startet beim Start die Console mit in der 'sinnlose' Dinge stehen die eh keinen jucken. Kannste also wieder aus machen wenn es dich nervt. :^)");
+        }
+
+        private void btRecKey_Click(object sender, EventArgs e)
+        {
+            btRecKey.Text = "Press a Button...";
+            btRecKey.KeyDown += recKey_keyDown;
+        }
+
+        private void btMarkKey_Click(object sender, EventArgs e)
+        {
+            btMarkKey.Text = "Press a Button...";
+            btMarkKey.KeyDown += markKey_keyDown;
+        }
+
+        private void recKey_keyDown(object sender, KeyEventArgs e)
+        {
+            btRecKey.Text = e.KeyCode.ToString();
+            btRecKey.KeyDown -= recKey_keyDown;
+            KEY_REC = e.KeyCode;
+        }
+
+        private void markKey_keyDown(object sender, KeyEventArgs e)
+        {
+            btMarkKey.Text = e.KeyCode.ToString();
+            btMarkKey.KeyDown -= markKey_keyDown;
+            KEY_MARK = e.KeyCode;
         }
     }
 }

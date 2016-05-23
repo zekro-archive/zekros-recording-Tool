@@ -42,7 +42,7 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="BUILDCOUNTER" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">460</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="autoSave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -81,6 +81,24 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DEVELOPER" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="KEY_REC" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="KEY_MARK" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="recKeySTRG" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="recKeySHIFT" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="markKeySTRG" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="markKeySHIFT" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
