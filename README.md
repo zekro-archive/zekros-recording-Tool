@@ -28,7 +28,7 @@ Zusätzliche Funktionen (seit v0.2.0124a):
 
 ---
 
-####WICHTIG
+#### WICHTIG
 
 Das Tool ist das erste Projekt welches in in Visual Basic (auf der Basis von C#) programmierte und auch veröffentlichte! Ich möchte damit mir selbst das programmieren beibringen, weswegen das Tool auch etwas unprofessionell wirkt. ;)
 
@@ -36,30 +36,30 @@ wenn du Bugs reporzen möchstes benutze bitte den Button "Report A Bug?" in der 
 
 ---
 
-####SCREENSHOTS
+#### SCREENSHOTS
 
 Hier siehst du einige Screenshots der neusten Version des Programms: http://imgur.com/a/xMEC9
 
 ---
 
-####WAS WIRD NOCH IMPLEMENTIERT?
+#### WAS WIRD NOCH IMPLEMENTIERT?
 
 - Anzeige wie lange es noch dauert bis die Platte voll ist
 
 ---
 
-####DOWNLOAD
+#### DOWNLOAD
 
 Hier kannst du die neuste Version herunterladen: https://github.com/zekroTJA/zekros-recording-Tool/releases
 
 ---
 
-####HOMEPAGE & SOCIAL NETWORKS
+#### HOMEPAGE & SOCIAL NETWORKS
 
-- Homepage: http://zekro.jimdo.com
+- Homepage: http://zekro.de
 - YouTube: http://youtube.com/zekrommaster110
-- Twitter: http://twitter.com/zekrommaster110
+- Twitter: http://twitter.com/zekrotja
 
 ---
 
-CONTACT: zekroyt[@]outlook.de
+CONTACT: contact[@]zekro.de
