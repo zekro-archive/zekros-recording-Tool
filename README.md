@@ -32,7 +32,7 @@ Zusätzliche Funktionen (seit v0.2.0124a):
 
 Das Tool ist das erste Projekt welches in in Visual Basic (auf der Basis von C#) programmierte und auch veröffentlichte! Ich möchte damit mir selbst das programmieren beibringen, weswegen das Tool auch etwas unprofessionell wirkt. ;)
 
-wenn du Bugs reporzen möchstes benutze bitte den Button "Report A Bug?" in der Info-Karte! Und bitte denk daran, es ist immernoch eine Pre Alpha Version! :^)
+wenn du Bugs reporten möchstes benutze bitte den Button "Report A Bug?" in der Info-Karte! Und bitte denk daran, es ist immernoch eine Pre Alpha Version! :^)
 
 ---
 
